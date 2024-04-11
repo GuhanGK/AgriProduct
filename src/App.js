@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import './App.css';
-import Layout from "./Components/Pages/Layout";
+import Layout from "./Components/Pages/Layout/main";
 import Dashboard from "./Components/Pages/DashBoard";
 import ProtectedRoute from "./Auth/ProductedRoute";
 import NoInternet from "./Components/Reusable/Nointernet";
@@ -25,11 +25,11 @@ function App() {
   return (
     <div className="App">
       <isOnlineContext.Provider value={isOnlineContextValue}>
-        <Router basename={process.env.PUBLIC_URL}>
+        <Router>
           <Routes>
-            <Route path="" element={<NoInternet />}>
+            <Route element={<NoInternet />}>
               <Route element={<ProtectedRoute />}>
-                <Route path="" element={<Layout />}>
+                <Route path="/" element={<Layout />}>
                   <Route path="/" element={<Dashboard />} />
                 </Route>
               </Route>

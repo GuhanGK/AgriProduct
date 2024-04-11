@@ -6,9 +6,9 @@ const Dashboard = () => {
     return (
         <>
             <DashboardStyle>
-                <Row className="text-center">
-                    <p>Hello World</p>
-                </Row>
+                {/* <Row className="text-center"> */}
+                <p>Hello World</p>
+                {/* </Row> */}
             </DashboardStyle>
         </>
     )
