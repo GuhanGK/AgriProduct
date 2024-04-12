@@ -7,7 +7,7 @@ const Dashboard = () => {
         <>
             <DashboardStyle>
                 {/* <Row className="text-center"> */}
-                <p>Hello World</p>
+                <p className="hello_world">Hello World</p>
                 {/* </Row> */}
             </DashboardStyle>
         </>

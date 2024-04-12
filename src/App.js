@@ -31,6 +31,7 @@ function App() {
               <Route element={<ProtectedRoute />}>
                 <Route path="/" element={<Layout />}>
                   <Route path="/" element={<Dashboard />} />
+                  <Route path="/home" element={<Dashboard />} />
                 </Route>
               </Route>
             </Route>
