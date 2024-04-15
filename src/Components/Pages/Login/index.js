@@ -10,12 +10,22 @@ export const Login = () => {
     console.log("submitted!!", e);
   };
 
+  const handleValidatePassword = (rule, value) => {
+    if (!value) {
+      return Promise.reject("Password is required!");
+    } else if (value.length < 8) {
+      return Promise.reject("Password must be at least 8 characters long!");
+    } else {
+      return Promise.resolve();
+    }
+  }
+
   return (
     <LoginStyle>
       <div className="container_wrap">
         <div className="login_container">
           <div className="container_data">
-            <h1>Login</h1>
+            <h1 className="login_title">Sign In</h1>
             <div className="login_form">
               <Form
                 onFinish={handleSubmit}
@@ -28,41 +38,49 @@ export const Login = () => {
                 }}
               >
                 <Form.Item
-                  label="Email ID"
-                  className="mt-3"
+                  label="User ID"
+                  className="mt-3 login_form_label"
                   name="email"
                   rules={[
                     {
                       required: true,
                       type: "email",
-                      message: "Email ID required!",
+                      message: "User Id is required!",
                     },
                   ]}
                 >
-                  <Input placeholder="Enter Email Id" maxLength={50} />
+                  <Input
+                    placeholder="Enter the user Id"
+                    className="login_form_input"
+                    maxLength={50}
+                  />
                 </Form.Item>
                 <Form.Item
-                  label="Enter Password"
-                  className="mt-3"
+                  label="Password"
+                  className="mt-3 login_form_label"
                   name="password"
                   rules={[
                     {
                       required: true,
-                      type: "password",
-                      message: "password required!",
+                      validator: handleValidatePassword
                     },
                   ]}
                 >
-                  <Input placeholder="Enter password" maxLength={50} />
+                  <Input
+                    type="password"
+                    placeholder="Enter the password"
+                    className="login_form_input"
+                    maxLength={50}
+                  />
                 </Form.Item>
 
                 <div className="text-center">
                   <Button
                     className="form_btn mt-4"
-                    type="primary"
+                    type="submit"
                     htmlType="submit"
                   >
-                    Login
+                    Sign in
                   </Button>
                 </div>
               </Form>

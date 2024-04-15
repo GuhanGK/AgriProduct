@@ -20,20 +20,40 @@ const LoginStyle = Styled.div`
         width: 50%;
         margin: auto;
         padding: 5rem 2rem;
-        background-color: #007e094d;
-        background-image: linear-gradient(to bottom right, #007e094d, #00e3ff87);
+        // background-color: #007e094d;
+        background-color: #00000075;
+        // background-image: linear-gradient(to bottom right, #007e094d, #00e3ff87);
         border-radius: 10px;
         box-shadow: 0px 0px 6px 3px #000000ab;
     }
+    .login_title{
+        color: #fff;
+        font-size: 42px;
+        font-weight: 600;
+    }
     .login_form{
-        width: 75%;
+        width: 85%;
         margin: auto;
     }
     .form_btn{
-        width: 50%;
+        width: 45%;
+        height: 45px;
+        background: #5dac72;
+        color: #fff;
+        font-weight: 600;
+        font-size: 18px;
     }
-   
-
+    .login_form_label{
+        text-align: left;
+    }
+    .login_form_label label{
+        color: #fff;
+        font-size: 14px;
+        font-weight: 600;
+    }
+    .login_form_input{
+        height: 40px;
+    }
  
     @media (max-width: 991px){
         
