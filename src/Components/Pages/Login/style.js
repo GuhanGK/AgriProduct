@@ -17,14 +17,12 @@ const LoginStyle = Styled.div`
         justify-content: center;
     }
     .container_data{
-        width: 50%;
+        width: 45%;
         margin: auto;
-        padding: 5rem 2rem;
-        // background-color: #007e094d;
-        background-color: #00000075;
-        // background-image: linear-gradient(to bottom right, #007e094d, #00e3ff87);
+        padding: 3rem 2rem;
+        background-color: #00000094;
         border-radius: 10px;
-        box-shadow: 0px 0px 6px 3px #000000ab;
+        box-shadow: 0px 0px 6px 3px #0000004d;
     }
     .login_title{
         color: #fff;
