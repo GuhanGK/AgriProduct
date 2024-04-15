@@ -8,6 +8,7 @@ import NoInternet from "./Components/Reusable/Nointernet";
 import { useNetworkState } from "react-use";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import { Login } from "./Components/Pages/Login";
 
 export const isOnlineContext = React.createContext();
 
@@ -28,6 +29,7 @@ function App() {
         <Router>
           <Routes>
             <Route element={<NoInternet />}>
+              <Route path="/login" element={<Login />} />
               <Route element={<ProtectedRoute />}>
                 <Route path="/" element={<Layout />}>
                   <Route path="/" element={<Dashboard />} />
