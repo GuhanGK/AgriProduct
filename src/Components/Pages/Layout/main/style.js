@@ -31,6 +31,17 @@ const LayoutStyle = Styled.div`
     .header_menu_icon{
         cursor: pointer;
     }
+
+    .header_navbar_items{
+        flex-direction: unset !important;
+    }
+    @media (max-width: 991px){
+        .header_navbar_items{
+            flex-direction: row !important;
+            gap: 8px;
+        }
+    }
+    
 `;
 
 export default LayoutStyle;

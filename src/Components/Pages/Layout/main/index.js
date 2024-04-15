@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import LayoutStyle from "./style";
 import { Outlet } from "react-router-dom";
 import Footer from "../../Footer";
+import Box from '@mui/material/Box';
+import CssBaseline from '@mui/material/CssBaseline';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -19,8 +21,6 @@ import IconButton from '@mui/material/IconButton';
 import MuiAppBar from '@mui/material/AppBar';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Row, Navbar, Nav } from "react-bootstrap";
-import { GiHamburgerMenu } from "react-icons/gi";
-import { IoIosContact } from "react-icons/io";
 
 const drawerWidth = 240;
 
@@ -77,78 +77,81 @@ const Layout = () => {
 
     return (
         <LayoutStyle mobileOpen={mobileOpen}>
-            <AppBar position="fixed" open={mobileOpen}>
-                <Toolbar className="header_toolbar_container">
-                    <div
-                        className="header_toolbar_items"
-                        color="inherit"
-                        aria-label="open drawer"
-                        edge="start"
-                        sx={{
-                            marginRight: 5,
-                            ...(mobileOpen && { display: 'none' }),
-                        }}
-                    >
-                        <div className="menu_icon_section">
-                            <MenuIcon className="header_menu_icon" onClick={handleDrawerOpen} />
-                            <p className="project_header">AgriTech</p>
-                        </div>
+            <Box>
+                <CssBaseline />
+                <AppBar position="sticky" open={mobileOpen}>
+                    <Toolbar className="header_toolbar_container">
+                        <div
+                            className="header_toolbar_items"
+                            color="inherit"
+                            aria-label="open drawer"
+                            edge="start"
+                            sx={{
+                                marginRight: 5,
+                                ...(mobileOpen && { display: 'none' }),
+                            }}
+                        >
+                            <div className="menu_icon_section">
+                                <MenuIcon className="header_menu_icon" onClick={handleDrawerOpen} />
+                                <p className="project_header">AgriTech</p>
+                            </div>
 
-                        <Row className="header_navbar_container">
-                            <Navbar collapseOnSelect expand="lg" className="navbar_container">
-                                <Nav>
-                                    <Nav.Link href="#home">Home</Nav.Link>
-                                    <Nav.Link href="#features">Features</Nav.Link>
-                                    <Nav.Link href="#pricing">Pricing</Nav.Link>
-                                </Nav>
-                            </Navbar>
-                        </Row>
-                    </div>
-                </Toolbar>
-            </AppBar>
-            <Drawer
-                variant="permanent"
-                open={mobileOpen}
-                onTransitionEnd={handleDrawerTransitionEnd}
-                onClose={handleDrawerClose}
-                ModalProps={{
-                    keepMounted: true,
-                }}
-                className="sidebar_drawer"
-            >
-                <DrawerHeader>
-                    <IconButton onClick={handleDrawerClose}>
-                        {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-                    </IconButton>
-                </DrawerHeader>
-                <Divider />
-                <List>
-                    {menuItems.map((item, index) => (
-                        <ListItem key={index} disablePadding sx={{ display: 'block' }}>
-                            <ListItemButton
-                                sx={{
-                                    minHeight: 48,
-                                    justifyContent: mobileOpen ? 'initial' : 'center',
-                                    px: 2.5,
-                                }}
-                            >
-                                <ListItemIcon
+                            <Row className="header_navbar_container">
+                                <Navbar collapseOnSelect expand="lg" className="navbar_container">
+                                    <Nav className="header_navbar_items">
+                                        <Nav.Link href="#home">Home</Nav.Link>
+                                        <Nav.Link href="#features">Features</Nav.Link>
+                                        <Nav.Link href="#pricing">Pricing</Nav.Link>
+                                    </Nav>
+                                </Navbar>
+                            </Row>
+                        </div>
+                    </Toolbar>
+                </AppBar>
+                <Drawer
+                    variant="permanent"
+                    open={mobileOpen}
+                    onTransitionEnd={handleDrawerTransitionEnd}
+                    onClose={handleDrawerClose}
+                    ModalProps={{
+                        keepMounted: true,
+                    }}
+                    className="sidebar_drawer"
+                >
+                    <DrawerHeader>
+                        <IconButton onClick={handleDrawerClose}>
+                            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+                        </IconButton>
+                    </DrawerHeader>
+                    <Divider />
+                    <List>
+                        {menuItems.map((item, index) => (
+                            <ListItem key={index} disablePadding sx={{ display: 'block' }}>
+                                <ListItemButton
                                     sx={{
-                                        minWidth: 0,
-                                        mr: mobileOpen ? 3 : 'auto',
-                                        justifyContent: 'center',
+                                        minHeight: 48,
+                                        justifyContent: mobileOpen ? 'initial' : 'center',
+                                        px: 2.5,
                                     }}
                                 >
-                                    {item.icon}
-                                </ListItemIcon>
-                                <ListItemText primary={item.text} sx={{ display: mobileOpen ? "block" : "none" }} />
-                            </ListItemButton>
-                        </ListItem>
-                    ))}
-                </List>
-            </Drawer>
-            <Outlet />
-            <Footer />
+                                    <ListItemIcon
+                                        sx={{
+                                            minWidth: 0,
+                                            mr: mobileOpen ? 3 : 'auto',
+                                            justifyContent: 'center',
+                                        }}
+                                    >
+                                        {item.icon}
+                                    </ListItemIcon>
+                                    <ListItemText primary={item.text} sx={{ display: mobileOpen ? "block" : "none" }} />
+                                </ListItemButton>
+                            </ListItem>
+                        ))}
+                    </List>
+                </Drawer>
+                <Outlet />
+                <Footer />
+            </Box>
         </LayoutStyle>
     );
 }
