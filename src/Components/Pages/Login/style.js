@@ -20,7 +20,7 @@ const LoginStyle = Styled.div`
         width: 50%;
         margin: auto;
         padding: 1rem;
-        background-color: #00000075;
+        background-color: #00000094;
         border-radius: 10px;
         box-shadow: 0px 0px 6px 3px #000000ab;
     }
@@ -90,10 +90,24 @@ const LoginStyle = Styled.div`
 
     .signup_form_label{
         width: 48%;
+        text-align: left;
+    }
+
+    .signup_form_label label{
+        color: #fff;
+        font-size: 14px;
+        font-weight: 600;
     }
 
     .registerpassword_field{
         width: 100%;
+        text-align: left;
+    }
+
+    .registerpassword_field label{
+        color: #fff;
+        font-size: 14px;
+        font-weight: 600;
     }
  
     @media (max-width: 991px){
