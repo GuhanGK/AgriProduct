@@ -16,11 +16,21 @@ const LoginStyle = Styled.div`
         background: #00000054;
         justify-content: center;
     }
+    .signup_container_data{
+        width: 50%;
+        margin: auto;
+        padding: 2rem;
+        background-color: #00000075;
+        border-radius: 10px;
+        box-shadow: 0px 0px 6px 3px #000000ab;
+    }
     .container_data{
         width: 45%;
         margin: auto;
         padding: 3rem 2rem;
         background-color: #00000094;
+        padding: 5rem 2rem;
+        /* background-color: #00000075; */
         border-radius: 10px;
         box-shadow: 0px 0px 6px 3px #0000004d;
     }
@@ -51,6 +61,14 @@ const LoginStyle = Styled.div`
     }
     .login_form_input{
         height: 40px;
+    }
+    .signup_link{
+        color:green;
+        cursor:pointer;
+    }
+    .signup_tag{
+        color:white;
+        text-align:left;
     }
  
     @media (max-width: 991px){
