@@ -40,7 +40,7 @@ export const Login = () => {
                 <Form
                   onFinish={handleSubmit}
                   form={form}
-                  className="payment_form"
+                  className=""
                   layout="vertical"
                   initialValues={{
                     email: "",
@@ -83,7 +83,7 @@ export const Login = () => {
                       maxLength={50}
                     />
                   </Form.Item>
-                  <p className="signup_tag">Don't have an account? <span className="signup_link" onClick={()=>navigate('/signup')}>Create here.</span></p>
+                  <p className="signup_tag">Don't have an account? <span className="signup_link" onClick={()=>navigate('/register')}>Create here.</span></p>
 
                   <div className="text-center">
                     <Button

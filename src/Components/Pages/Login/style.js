@@ -19,7 +19,7 @@ const LoginStyle = Styled.div`
     .signup_container_data{
         width: 50%;
         margin: auto;
-        padding: 2rem;
+        padding: 1rem;
         background-color: #00000075;
         border-radius: 10px;
         box-shadow: 0px 0px 6px 3px #000000ab;
@@ -29,7 +29,7 @@ const LoginStyle = Styled.div`
         margin: auto;
         padding: 3rem 2rem;
         background-color: #00000094;
-        padding: 5rem 2rem;
+        padding: 3rem 2rem;
         /* background-color: #00000075; */
         border-radius: 10px;
         box-shadow: 0px 0px 6px 3px #0000004d;
@@ -41,6 +41,10 @@ const LoginStyle = Styled.div`
     }
     .login_form{
         width: 85%;
+        margin: auto;
+    }
+    .signup_form{
+        width: 95%;
         margin: auto;
     }
     .form_btn{
@@ -63,12 +67,33 @@ const LoginStyle = Styled.div`
         height: 40px;
     }
     .signup_link{
-        color:green;
+        color: red;
         cursor:pointer;
     }
     .signup_tag{
         color:white;
         text-align:left;
+    }
+
+    .payment_form{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 5px;
+    }
+
+    .register_button_section{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .signup_form_label{
+        width: 48%;
+    }
+
+    .registerpassword_field{
+        width: 100%;
     }
  
     @media (max-width: 991px){

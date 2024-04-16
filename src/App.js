@@ -31,7 +31,7 @@ function App() {
           <Routes>
             <Route element={<NoInternet />}>
               <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<SignUp />} />
+              <Route path="/register" element={<SignUp />} />
               <Route element={<ProtectedRoute />}>
                 <Route path="/" element={<Layout />}>
                   <Route path="/" element={<Dashboard />} />
