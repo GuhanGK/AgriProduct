@@ -13,7 +13,8 @@ const WeatherStyle = Styled.div`
         display: flex;
         justify-content: center;
         align-items: center;
-        background: transparent linear-gradient(180deg, #F4E8FA 0%, #00C0F9 100%) 0% 0% no-repeat padding-box;
+        background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(77,195,30,1) 0%, rgba(66,197,62,1) 13%, rgba(0,212,255,1) 96%);
+        // background: transparent linear-gradient(180deg, #F4E8FA 0%, #00C0F9 100%) 0% 0% no-repeat padding-box;
         border-radius: 8px;
     }
     .weather_header{
