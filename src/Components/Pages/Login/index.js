@@ -9,7 +9,7 @@ export const Login = () => {
   const handleSubmit = (e) => {
     console.log("submitted!!", e);
   };
-
+  
   const handleValidatePassword = (rule, value) => {
     if (!value) {
       return Promise.reject("Password is required!");

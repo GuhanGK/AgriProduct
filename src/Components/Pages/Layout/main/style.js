@@ -28,6 +28,9 @@ const LayoutStyle = Styled.div`
     .sidebar_drawer .css-12i7wg6-MuiPaper-root-MuiDrawer-paper{
         width: ${props => props.mobileOpen ? "240px" : "auto"}
     }
+    .main_outlet_container{
+        margin-left: ${props => props.mobileOpen ? "250px" : "5rem"}
+    }
     .header_menu_icon{
         cursor: pointer;
     }

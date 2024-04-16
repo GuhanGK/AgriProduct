@@ -92,7 +92,7 @@ const Layout = () => {
                             }}
                         >
                             <div className="menu_icon_section">
-                                <MenuIcon className="header_menu_icon" onClick={handleDrawerOpen} />
+                                {!mobileOpen && <MenuIcon className="header_menu_icon" onClick={handleDrawerOpen} />}
                                 <p className="project_header">AgriTech</p>
                             </div>
 
@@ -149,8 +149,10 @@ const Layout = () => {
                         ))}
                     </List>
                 </Drawer>
-                <Outlet />
-                <Footer />
+                <Box component="main" className="main_outlet_container" sx={{ flexGrow: 1, p: 3 }}>
+                    <Outlet />
+                    {/* <Footer /> */}
+                </Box>
             </Box>
         </LayoutStyle>
     );
