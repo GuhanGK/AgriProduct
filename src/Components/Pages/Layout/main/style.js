@@ -3,7 +3,8 @@ import Styled from 'styled-components';
 const LayoutStyle = Styled.div`
     .header_toolbar_container{
         width: 100%;
-        background: green !important;
+        background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(77,195,30,1) 0%, rgba(66,197,62,1) 34%, rgba(154,229,29,1) 96%);
+        // background: green !important;
     }
     .header_toolbar_items{
         width: 100%;
@@ -37,6 +38,10 @@ const LayoutStyle = Styled.div`
 
     .header_navbar_items{
         flex-direction: unset !important;
+        color: #fff;
+    }
+    .navbar_list_item{
+        color: #fff !important;
     }
     @media (max-width: 991px){
         .header_navbar_items{

@@ -99,9 +99,9 @@ const Layout = () => {
                             <Row className="header_navbar_container">
                                 <Navbar collapseOnSelect expand="lg" className="navbar_container">
                                     <Nav className="header_navbar_items">
-                                        <Nav.Link href="#home">Home</Nav.Link>
-                                        <Nav.Link href="#features">Features</Nav.Link>
-                                        <Nav.Link href="#pricing">Pricing</Nav.Link>
+                                        <Nav.Link href="#home" className="navbar_list_item">Home</Nav.Link>
+                                        <Nav.Link href="#features" className="navbar_list_item">Features</Nav.Link>
+                                        <Nav.Link href="#pricing" className="navbar_list_item">Pricing</Nav.Link>
                                     </Nav>
                                 </Navbar>
                             </Row>
