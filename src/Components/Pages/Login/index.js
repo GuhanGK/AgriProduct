@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import LoginStyle from "./style";
 import { Form, Input, Button, Select, Spin } from "antd";
 import { jwtDecode } from 'jwt-decode'
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { setUserData } from "../../../Redux/AuthRedux";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export const Login = () => {
   const [form] = Form.useForm();
@@ -15,6 +15,14 @@ export const Login = () => {
   
   const [loading, setLoading] = useState(false);
   let baseUrl = "http://127.0.0.1:3000/agri/";
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
+
+
+  useEffect(()=>{
+    if(isLoggedIn){
+      navigate("/");
+    }
+  },[])
 
   const handleSubmit = async (e) => {
     console.log("submitted!!", e);
@@ -28,8 +36,8 @@ export const Login = () => {
       console.log("response==>", response);
       if (response.data.status) {
         setLoading(false);
-        const decodedUser = userToken ? jwtDecode(response.data?.authToken) : "";
         const userToken = response?.data?.authToken;
+        const decodedUser = userToken ? jwtDecode(response.data?.authToken) : "";
         let result = {};
         if (userToken) {
           result = {
