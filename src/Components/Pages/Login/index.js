@@ -2,19 +2,32 @@ import React, { useState } from "react";
 import LoginStyle from "./style";
 import { Form, Input, Button, Select, Spin } from "antd";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export const Login = () => {
   const [form] = Form.useForm();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  let baseUrl = "http://127.0.0.1:3000/agri/";
 
-  const handleSubmit = (e) => {
-    setLoading(true);
+  const handleSubmit = async(e) => {
     console.log("submitted!!", e);
-    setTimeout(() => {
-      setLoading(false);
-      navigate("/");
-    }, 1500);
+    let obj = {
+      "emailId":e.email,
+      "password":e.password,
+    }
+    setLoading(true);
+    try {
+      let response = await axios.post(`${baseUrl}login`, obj);
+      console.log("response==>",response)
+      if(response.data.status){
+          setLoading(false);
+          navigate("/");
+      }     
+      
+    } catch (error) {
+      console.log("error while making api call..", error)
+    }
   };
   
   const handleValidatePassword = (rule, value) => {

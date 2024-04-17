@@ -2,19 +2,35 @@ import React, { useState } from "react";
 import LoginStyle from "../Login/style";
 import { Form, Input, Button, Select, Spin } from "antd";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export const SignUp = () => {
   const [form] = Form.useForm();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-
-  const handleSubmit = (e) => {
-    setLoading(true);
+  let baseUrl = "http://127.0.0.1:3000/agri/";
+  
+  const handleSubmit = async(e) => {
     console.log("submitted!!", e);
-    setTimeout(() => {
-      setLoading(false);
-      navigate("/");
-    }, 1500);
+    let obj = {
+      "emailId":e.email,
+      "password":e.password,
+      "firstName":e.firstName,
+      "lastName":e.lastName,
+      "phoneNumber":e.phone
+    }
+    setLoading(true);
+    try {
+      let response = await axios.post(`${baseUrl}register`, obj);
+      console.log("response==>",response)
+      if(response.data.status){
+          setLoading(false);
+          navigate("/");
+      }     
+      
+    } catch (error) {
+      console.log("error while making api call..", error)
+    }
   };
 
   const handleValidatePassword = (rule, value) => {
@@ -81,19 +97,19 @@ export const SignUp = () => {
                   />
                 </Form.Item>
                 <Form.Item
-                  label="User ID"
+                  label="Email ID"
                   className="signup_form_label mb-1"
                   name="email"
                   rules={[
                     {
                       required: true,
                       type: "email",
-                      message: "User Id is required!",
+                      message: "Email Id is required!",
                     },
                   ]}
                 >
                   <Input
-                    placeholder="Enter the user Id"
+                    placeholder="Enter your Email Id"
                     className="login_form_input"
                     maxLength={50}
                   />
