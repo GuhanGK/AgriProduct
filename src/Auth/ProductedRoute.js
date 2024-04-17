@@ -1,7 +1,10 @@
-import React, { useState } from "react";
-import { Outlet } from "react-router-dom";
+import React from "react";
+import { useSelector } from "react-redux";
+import { Outlet, useNavigate } from "react-router-dom";
 const ProtectedRoute = () => {
-    const [loading, setLoading] = useState(true)
-    return loading ? <Outlet /> : window.location.href = "https://www.w3schools.com/";
+    const navigate = useNavigate();
+    const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
+    console.log("isLoggedIn--->", isLoggedIn)
+    return isLoggedIn ? <Outlet /> : navigate("/login");
 };
 export default ProtectedRoute; 

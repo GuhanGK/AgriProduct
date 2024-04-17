@@ -12,6 +12,7 @@ const initialState = {
     sessionTimeOut: false,
     authToken: authToken,
     user: user,
+    isLoggedIn: false
 };
 
 export const authUserSlice = createSlice({
@@ -24,6 +25,7 @@ export const authUserSlice = createSlice({
                 userData: action.payload,
                 authToken: action.payload.authToken,
                 user: action.payload.user,
+                isLoggedIn: action.payload.isLoggedIn
             };
         },
         setSessionTimeOut: (state, action) => {

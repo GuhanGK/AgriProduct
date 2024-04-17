@@ -9,27 +9,26 @@ export const SignUp = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   let baseUrl = "http://127.0.0.1:3000/agri/";
-  
-  const handleSubmit = async(e) => {
+
+  const handleSubmit = async (e) => {
     console.log("submitted!!", e);
     let obj = {
-      "emailId":e.email,
-      "password":e.password,
-      "firstName":e.firstName,
-      "lastName":e.lastName,
-      "phoneNumber":e.phone
-    }
+      emailId: e.email,
+      password: e.password,
+      firstName: e.firstName,
+      lastName: e.lastName,
+      phoneNumber: e.phone,
+    };
     setLoading(true);
     try {
       let response = await axios.post(`${baseUrl}register`, obj);
-      console.log("response==>",response)
-      if(response.data.status){
-          setLoading(false);
-          navigate("/");
-      }     
-      
+      console.log("response==>", response);
+      if (response.data.status) {
+        setLoading(false);
+        navigate("/login");
+      }
     } catch (error) {
-      console.log("error while making api call..", error)
+      console.log("error while making api call..", error);
     }
   };
 
