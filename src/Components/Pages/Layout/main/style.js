@@ -26,6 +26,20 @@ const LayoutStyle = Styled.div`
             margin-bottom: 0rem;
         }
     }
+    .profile_wrapp{
+        display: flex;
+        align-items:center;
+        gap: 2rem;
+    }
+    .profile_circle{
+        width: 45px;
+        height: 45px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        background: #318b458c;
+    }
     .sidebar_drawer .css-12i7wg6-MuiPaper-root-MuiDrawer-paper{
         width: ${props => props.mobileOpen ? "240px" : "auto"}
     }

@@ -7,7 +7,6 @@ import { IoIosContact } from "react-icons/io";
 const Header = () => {
     const [responsiveNav, setResponsiveNav] = useState(false)
     const [showNavItems, setShowNavItems] = useState(false)
-
     const navRef = useRef(null);
 
     useEffect(() => {

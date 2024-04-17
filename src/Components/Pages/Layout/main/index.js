@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import LayoutStyle from "./style";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import Footer from "../../Footer";
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -21,6 +21,9 @@ import IconButton from '@mui/material/IconButton';
 import MuiAppBar from '@mui/material/AppBar';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Row, Navbar, Nav } from "react-bootstrap";
+import { Button, Popover } from 'antd';
+import { useDispatch } from "react-redux";
+import { setUserData } from "../../../../Redux/AuthRedux";
 
 const drawerWidth = 240;
 
@@ -36,6 +39,8 @@ const Layout = () => {
     const theme = useTheme();
     const [mobileOpen, setMobileOpen] = useState(false);
     const [isClosing, setIsClosing] = useState(false);
+    const dispatch = useDispatch();  
+    const navigate = useNavigate();  
 
     const handleDrawerClose = () => {
         setIsClosing(true);
@@ -68,13 +73,27 @@ const Layout = () => {
         }),
     }));
 
+    const logoutHandler = async()=>{
+        localStorage.setItem("user", "");
+        localStorage.setItem("userData", "");
+        dispatch(setUserData(""));
+        navigate("/login");
+    }
+
     const menuItems = [
         { text: 'Inbox', icon: <InboxIcon /> },
         { text: 'Starred', icon: <MailIcon /> },
         { text: 'Send email', icon: <InboxIcon /> },
         { text: 'Drafts', icon: <MailIcon /> }
     ];
-
+    let user = JSON.parse(localStorage.getItem('userData'));
+    const content = (
+        <div>
+          <p>Name : {user?.name}</p>
+          <p>Email: {user?.emailId}</p>
+          <Button onClick={logoutHandler}>Logout</Button>
+        </div>
+      );
     return (
         <LayoutStyle mobileOpen={mobileOpen}>
             <Box>
@@ -98,11 +117,21 @@ const Layout = () => {
 
                             <Row className="header_navbar_container">
                                 <Navbar collapseOnSelect expand="lg" className="navbar_container">
-                                    <Nav className="header_navbar_items">
+                                    {/* <Nav className="header_navbar_items">
                                         <Nav.Link href="#home" className="navbar_list_item">Home</Nav.Link>
                                         <Nav.Link href="#features" className="navbar_list_item">Features</Nav.Link>
                                         <Nav.Link href="#pricing" className="navbar_list_item">Pricing</Nav.Link>
-                                    </Nav>
+                                    </Nav> */}
+                                    <div className="profile_wrapp">
+                                        <div>Hi {user?.name}!</div>
+                                            <Popover content={content} title="Title" trigger="click">
+                                                <div className="profile_circle">  
+                                                    {user?.name[0]}
+                                                </div>
+                                            </Popover>
+                                      
+                                        
+                                    </div>
                                 </Navbar>
                             </Row>
                         </div>

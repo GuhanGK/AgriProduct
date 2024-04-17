@@ -9,11 +9,10 @@ import { useDispatch, useSelector } from "react-redux";
 
 export const Login = () => {
   const [form] = Form.useForm();
-  const navigate = useNavigate();
-
-  const dispatch = useDispatch();
-  
+  const navigate = useNavigate();  
+  const dispatch = useDispatch();  
   const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
   let baseUrl = "http://127.0.0.1:3000/agri/";
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
 
@@ -32,8 +31,7 @@ export const Login = () => {
     };
     setLoading(true);
     try {
-      let response = await axios.post(`${baseUrl}login`, obj);
-      console.log("response==>", response);
+      let response = await axios.post(`${baseUrl}login`, obj);      
       if (response.data.status) {
         setLoading(false);
         const userToken = response?.data?.authToken;
@@ -47,6 +45,7 @@ export const Login = () => {
           };
         }
         localStorage.setItem("user", JSON.stringify(result));
+        localStorage.setItem("userData", JSON.stringify(decodedUser));
         const authUser = localStorage.getItem("user");
         const user = JSON.parse(authUser);
         dispatch(setUserData(user));
@@ -54,6 +53,10 @@ export const Login = () => {
       }
     } catch (error) {
       console.log("error while making api call..", error);
+      let message = error?.response?.data?.message || "Error while login!!"
+      setErrorMsg(message);
+      setLoading(false);
+      return false;
     }
   };
 
@@ -122,6 +125,8 @@ export const Login = () => {
                     maxLength={50}
                   />
                 </Form.Item>
+                {errorMsg && <p className="error_msg text-danger mb-0 ">{errorMsg}</p> }
+
                 <p className="signup_tag">
                   Don't have an account?{" "}
                   <span

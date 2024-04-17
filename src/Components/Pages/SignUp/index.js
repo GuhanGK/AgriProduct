@@ -8,6 +8,8 @@ export const SignUp = () => {
   const [form] = Form.useForm();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
+
   let baseUrl = "http://127.0.0.1:3000/agri/";
 
   const handleSubmit = async (e) => {
@@ -29,6 +31,11 @@ export const SignUp = () => {
       }
     } catch (error) {
       console.log("error while making api call..", error);
+      let message = error?.response?.data?.message || "Error while login!!"
+      setErrorMsg(message);
+      setLoading(false);
+      return false;
+
     }
   };
 
@@ -152,6 +159,8 @@ export const SignUp = () => {
                     maxLength={50}
                   />
                 </Form.Item>
+                {errorMsg && <p className="error_msg text-danger mb-0 ">{errorMsg}</p> }
+
                 <p className="signup_tag">
                   Already have an account?{" "}
                   <span
