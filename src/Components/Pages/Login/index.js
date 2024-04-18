@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import LoginStyle from "./style";
-import { Form, Input, Button, Select, Spin } from "antd";
+import { Form, Input, Button, Spin } from "antd";
 import { jwtDecode } from 'jwt-decode'
 import { useNavigate } from "react-router-dom";
 import axios from "axios";

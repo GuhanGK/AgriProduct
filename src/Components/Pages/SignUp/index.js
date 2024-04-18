@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import LoginStyle from "../Login/style";
-import { Form, Input, Button, Select, Spin } from "antd";
+import { Form, Input, Button, Spin } from "antd";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 

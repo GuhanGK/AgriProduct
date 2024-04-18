@@ -20,7 +20,7 @@ import { styled, useTheme } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import MuiAppBar from '@mui/material/AppBar';
 import MenuIcon from '@mui/icons-material/Menu';
-import { Row, Navbar, Nav } from "react-bootstrap";
+import { Row, Navbar } from "react-bootstrap";
 import { Button, Popover } from 'antd';
 import { useDispatch } from "react-redux";
 import { setUserData } from "../../../../Redux/AuthRedux";
@@ -38,17 +38,15 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 const Layout = () => {
     const theme = useTheme();
     const [mobileOpen, setMobileOpen] = useState(false);
-    const [isClosing, setIsClosing] = useState(false);
     const dispatch = useDispatch();  
     const navigate = useNavigate();  
 
     const handleDrawerClose = () => {
-        setIsClosing(true);
         setMobileOpen(false);
     };
 
-    const handleDrawerTransitionEnd = () => {
-        setIsClosing(false);
+    const handleDrawerTransitionEnd = (e) => {
+        e.preventDefault()
     };
 
     const handleDrawerOpen = () => {

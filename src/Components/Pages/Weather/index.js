@@ -7,19 +7,16 @@ import { Row } from "react-bootstrap";
 function WeatherDisplay() {
   const [city, setCity] = useState("");
   const [weatherData, setWeatherData] = useState();
-  const [hourlyWeather, setHourlyWeather] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
   const [currentDate, setCurrentDate] = useState('');
-  const [currentTime, setCurrentTime] = useState('');
 
   useEffect(() => {
     const interval = setInterval(() => {
       const now = new Date();
       const options = { weekday: 'long', hour: 'numeric', minute: 'numeric' };
       setCurrentDate(new Intl.DateTimeFormat('en-US', options).format(now));
-      setCurrentTime(now.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric' }));
     }, 1000); 
 
     return () => clearInterval(interval);
