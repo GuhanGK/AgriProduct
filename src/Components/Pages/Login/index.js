@@ -125,7 +125,7 @@ export const Login = () => {
                     maxLength={50}
                   />
                 </Form.Item>
-                {errorMsg && <p className="error_msg text-danger mb-0 ">{errorMsg}</p> }
+                {errorMsg && <p className="error_msg text-danger text-left mb-0 ">{errorMsg}</p> }
 
                 <p className="signup_tag">
                   Don't have an account?{" "}
