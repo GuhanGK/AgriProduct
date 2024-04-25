@@ -24,7 +24,9 @@ import { Row, Navbar } from "react-bootstrap";
 import { Button, Popover } from 'antd';
 import { useDispatch } from "react-redux";
 import { setUserData } from "../../../../Redux/AuthRedux";
-
+import CropImg from "../../../../Assets/Images/cropImg.png";
+import PestImg from "../../../../Assets/Images/pestImg.png";
+import SoilImg from "../../../../Assets/Images/soiltesting.png";
 const drawerWidth = 240;
 
 const DrawerHeader = styled('div')(({ theme }) => ({
@@ -79,10 +81,9 @@ const Layout = () => {
     }
 
     const menuItems = [
-        { text: 'Inbox', icon: <InboxIcon /> },
-        { text: 'Starred', icon: <MailIcon /> },
-        { text: 'Send email', icon: <InboxIcon /> },
-        { text: 'Drafts', icon: <MailIcon /> }
+        { text: 'Crop Management', icon: <img src={CropImg} alt="Crop Management" width={25}/> },
+        { text: 'Pest detection', icon: <img src={PestImg} alt="Crop Management" width={25}/> },
+        { text: 'Soil testing', icon: <img src={SoilImg} alt="Crop Management" width={25}/> },
     ];
     let user = JSON.parse(localStorage.getItem('userData'));
     const content = (

@@ -82,7 +82,7 @@ function WeatherDisplay() {
 
   return (
     <WeatherStyle>
-      <div>
+      <div className="weather_main_section">
         {/* <h1>Weather Forecast</h1> */}
         {/* <input
           type="text"
