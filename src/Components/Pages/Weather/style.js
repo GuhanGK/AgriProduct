@@ -6,7 +6,6 @@ const WeatherStyle = Styled.div`
         height: 200px;
         fill: #FFF;
     }
-
     .weather_main_section{
         display: flex;
         justify-content: center;

@@ -31,7 +31,7 @@ const DashboardStyle = Styled.div`
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 350px;
+        height: 300px;
         .carousel-inner {
             position: relative;
             width: 100%;
