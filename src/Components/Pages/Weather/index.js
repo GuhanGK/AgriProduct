@@ -26,6 +26,7 @@ function WeatherDisplay() {
 
   useEffect(() => {
     const getLocation = () => {
+        setLoading(true);
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
           (position) => {
@@ -48,17 +49,17 @@ function WeatherDisplay() {
   }, []);
 
   const fetchWeatherDataByCoords = async (latitude, longitude) => {
-    setLoading(true);
     setError("");
     try {
       const response = await axios.get(
         `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric`
       );
       setWeatherData(response.data);
+      setLoading(false);
     } catch (error) {
       setError("Error fetching weather data. Please try again.");
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   const handleSubmit = (e) => {
