@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { ReactComponent as CloudImg } from "../../../Assets/Images/cloud.svg";
 import WeatherStyle from "./style";
 import axios from "axios";
-import { Row } from "react-bootstrap";
+import { Row, Spinner } from "react-bootstrap";
 
 function WeatherDisplay() {
   const [city, setCity] = useState("");
@@ -81,8 +81,8 @@ function WeatherDisplay() {
   };
 
   return (
-    <WeatherStyle>
-      <div className="weather_main_section">
+    <WeatherStyle className="d-flex justify-content-center">
+      {/* <div className="weather_main_section"> */}
         {/* <h1>Weather Forecast</h1> */}
         {/* <input
           type="text"
@@ -93,37 +93,43 @@ function WeatherDisplay() {
         <button type="submit" onSubmit={handleSubmit}>
           Get Weather
         </button> */}
-        {loading && <p>Loading...</p>}
-        {error && <p>{error}</p>}
-        <Row className="weather_header_container">
-            <h2 className="text-center weather_place_title">Weather in {weatherData?.name}</h2>
-            <div className="weather_header"> 
-                <CloudImg className="cloud_img" />
-                <div className="weather_temp_value">
-                    <p className="mb-0">{weatherData?.main.temp}°C</p>
-                    <p className="mb-0 current_date_time">{currentDate}</p>
-                </div> 
-                <div className="weather_deatils_box">
-                    <div className="weather_deatils_data">
-                        <p>Temperature: </p>
-                        <p>{weatherData?.main?.temp}°C</p>
+        {/* 
+        {error && <p>{error}</p>} */}
+        {loading ?
+            <Spinner animation="border" variant="success" />
+        :
+            <Row className="weather_header_container">
+                <h2 className="text-center weather_place_title">Weather in {weatherData?.name}</h2>
+                <div className="weather_header"> 
+                    <div className="weather_image_side">
+                        <CloudImg className="cloud_img" />
+                        <div className="weather_temp_value">    
+                            <p className="mb-0">{weatherData?.main.temp}°C</p>
+                            <p className="mb-0 current_date_time">{currentDate}</p>
+                        </div> 
                     </div>
-                    <div className="weather_deatils_data">
-                        <p>Weather Condition: </p>
-                        <p>{weatherData?.weather[0]?.main}</p>
-                    </div>
-                    <div className="weather_deatils_data">
-                        <p>Humidity: </p>
-                        <p>{weatherData?.main?.humidity}%</p>
-                    </div>
-                    <div className="weather_deatils_data">
-                        <p>Wind Speed: </p>
-                        <p>{weatherData?.wind?.speed} m/s</p>
+                    
+                    <div className="weather_deatils_box">
+                        <div className="weather_deatils_data">
+                            <p>Temperature: </p>
+                            <p>{weatherData?.main?.temp}°C</p>
+                        </div>
+                        <div className="weather_deatils_data">
+                            <p>Weather Condition: </p>
+                            <p>{weatherData?.weather[0]?.main}</p>
+                        </div>
+                        <div className="weather_deatils_data">
+                            <p>Humidity: </p>
+                            <p>{weatherData?.main?.humidity}%</p>
+                        </div>
+                        <div className="weather_deatils_data">
+                            <p>Wind Speed: </p>
+                            <p>{weatherData?.wind?.speed} m/s</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </Row>
-      </div>
+            </Row>
+        }
     </WeatherStyle>
   );
 }

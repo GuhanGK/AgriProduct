@@ -12,11 +12,6 @@ const DashboardStyle = Styled.div`
         align-items: center;
         gap: 15px;
     }
-
-    .weather_container{
-        display: flex;
-        justify-content: center;
-    }
     
     .carousel_box{
         width: 100%;

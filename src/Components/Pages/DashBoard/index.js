@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import DashboardStyle from "./style";
 import WeatherDisplay from "../Weather";
-import { motion, AnimatePresence } from 'framer-motion';
 import Image1 from "../../../Assets/Images/Img1.jpg";
 import Image2 from "../../../Assets/Images/Img2.jpg";
 import Image3 from "../../../Assets/Images/Img3.jpg";
@@ -14,24 +13,6 @@ const Dashboard = () => {
         Image2,
         Image3
     ];
-
-    const [currentIndex, setCurrentIndex] = useState(0);
-
-    const handleNext = () => {
-        setCurrentIndex((prevIndex) => (prevIndex === images.length - 1 ? 0 : prevIndex + 1));
-    };
-
-    const handlePrev = () => {
-        setCurrentIndex((prevIndex) => (prevIndex === 0 ? images.length - 1 : prevIndex - 1));
-    };
-
-    useEffect(() => {
-        const intervalId = setInterval(() => {
-            setCurrentIndex((prevIndex) => (prevIndex === images.length - 1 ? 0 : prevIndex + 1));
-        }, 3000);
-
-        return () => clearInterval(intervalId);
-    }, [currentIndex, images.length]);
 
     return (
         <>
@@ -48,9 +29,10 @@ const Dashboard = () => {
                             })}
                         </Carousel>
                     </div>
-                    <div className="weather_container">
-                        <WeatherDisplay />
-                    </div>
+                </div>
+                <br />
+                <div className="weather_container">
+                    <WeatherDisplay />
                 </div>
             </DashboardStyle>
         </>

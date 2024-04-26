@@ -7,8 +7,14 @@ const WeatherStyle = Styled.div`
         fill: #FFF;
     }
     .weather_main_section{
+        width: 100%;
         display: flex;
         justify-content: center;
+    }
+    .weather_image_side{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
     }
     .weather_header_container{
         width: 100%;
@@ -26,7 +32,7 @@ const WeatherStyle = Styled.div`
         justify-content: space-between;
     }
     .weather_deatils_box{
-        width: 50%;
+        width: 100%;
         display: flex;
         flex-direction: column;
         justify-content: center;
