@@ -14,14 +14,17 @@ export const Login = () => {
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   let baseUrl = "http://127.0.0.1:3000/agri/";
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
+  const isLoggedIn = localStorage.getItem("isLoggedIn");
 
 
   useEffect(()=>{
     if(isLoggedIn){
       navigate("/");
     }
-  },[])
+    else{
+      navigate("/login");
+    }
+  },[isLoggedIn])
 
   const handleSubmit = async (e) => {
     console.log("submitted!!", e);
@@ -44,6 +47,7 @@ export const Login = () => {
             user: decodedUser,
           };
         }
+        localStorage.setItem("isLoggedIn", JSON.stringify(result.isLoggedIn));
         localStorage.setItem("user", JSON.stringify(result));
         localStorage.setItem("userData", JSON.stringify(decodedUser));
         const authUser = localStorage.getItem("user");
@@ -83,6 +87,7 @@ export const Login = () => {
                 onFinish={handleSubmit}
                 form={form}
                 className=""
+                autoComplete="off"
                 layout="vertical"
                 initialValues={{
                   email: "",

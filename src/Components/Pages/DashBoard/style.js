@@ -22,11 +22,12 @@ const DashboardStyle = Styled.div`
         margin: 0 10px;
     }
     .carousel_Img_container{
-        width: 100%;
+        width: 80%;
+        margin: auto;
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 300px;
+        height: 500px;
         .carousel-inner {
             position: relative;
             width: 100%;
