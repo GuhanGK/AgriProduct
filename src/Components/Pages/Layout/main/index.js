@@ -74,6 +74,7 @@ const Layout = () => {
     }));
 
     const logoutHandler = async()=>{
+        localStorage.setItem("isLoggedIn", false);
         localStorage.setItem("user", "");
         localStorage.setItem("userData", "");
         dispatch(setUserData(""));
@@ -85,7 +86,11 @@ const Layout = () => {
         { text: 'Pest detection', icon: <img src={PestImg} alt="Crop Management" width={25}/> },
         { text: 'Soil testing', icon: <img src={SoilImg} alt="Crop Management" width={25}/> },
     ];
-    let user = JSON.parse(localStorage.getItem('userData'));
+    let data = localStorage.getItem('userData');
+    let user;
+    if(data){
+        user = JSON.parse(data);
+    }
     const content = (
         <div>
           <p>Name : {user?.name}</p>
