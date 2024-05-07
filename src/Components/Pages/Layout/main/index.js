@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import LayoutStyle from "./style";
 import { Outlet, useNavigate } from "react-router-dom";
 import Footer from "../../Footer";
@@ -43,6 +43,19 @@ const Layout = () => {
     const dispatch = useDispatch();  
     const navigate = useNavigate();  
 
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
+    console.log("Login ~ isLoggedIn---->", isLoggedIn)
+  
+  
+    useEffect(()=>{
+      if(isLoggedIn){
+        navigate("/");
+      }
+      else{
+        navigate("/login");
+      }
+    },[isLoggedIn]);
+    
     const handleDrawerClose = () => {
         setMobileOpen(false);
     };

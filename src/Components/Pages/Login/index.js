@@ -15,15 +15,18 @@ export const Login = () => {
   const [errorMsg, setErrorMsg] = useState("");
   let baseUrl = "http://127.0.0.1:3000/agri/";
   const isLoggedIn = localStorage.getItem("isLoggedIn");
+  console.log("Login ~ isLoggedIn---->", isLoggedIn)
 
 
   useEffect(()=>{
     if(isLoggedIn){
+      console.log("inside if condition")
       navigate("/");
     }
-    else{
+    // else{
+      console.log("inside else condition")
       navigate("/login");
-    }
+    // }
   },[isLoggedIn])
 
   const handleSubmit = async (e) => {
