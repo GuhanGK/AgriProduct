@@ -23,6 +23,9 @@ export const SoilTesting = () => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+  const [file, setFile] = useState(null);
+  const [uploadedImage, setUploadedImage] = useState(null);
+  console.log("SoilTesting ~ uploadedImage---->", uploadedImage)
   let baseUrl = "http://127.0.0.1:3000/agri/";
   const images = [Image1, Image2, Image3, Image4, Image5, Image6];
 
@@ -70,34 +73,24 @@ export const SoilTesting = () => {
     },
   ];
 
-  const draggerProps = {
-    name: 'file',
-    multiple: false,
-    // action: 'http://127.0.0.1:3000/agri/soil-testing',
-    beforeUpload: file => {
-      const isImage = file.type.startsWith('image/');
-      if (!isImage) {
-        message.error('You can only upload image files!');
-      }
-      return isImage;
-    },
-    onChange(info) {
-      console.log("onChange ~ info---->", info)
-      const { status } = info.file;
-      if (status !== 'uploading') {
-        console.log(info.file, info.fileList);
-      }
-      if (status === 'done') {
-        message.success(`${info.file.name} file uploaded successfully.`);
-      } else if (status === 'error') {
-        message.error(`${info.file.name} file upload failed.`);
-      }
-    },
-    onDrop(e) {
-      console.log('Dropped files', e.dataTransfer.files);
-    },
+  const handleImageUpload = info => {
+    if (info.file.status === 'done') {
+      setUploadedImage(info.file.originFileObj);
+      message.success(`${info.file.name} file uploaded successfully.`);
+    } else if (info.file.status === 'error') {
+      message.error(`${info.file.name} file upload failed.`);
+    }
   };
 
+  const handleFileChange = (e) => {
+    const selectedFile = e.target.files[0];
+    console.log("handleFileChange ~ selectedFile---->", selectedFile)
+    setFile(selectedFile);
+  };
+
+  const handleDivClick = () => {
+    document.getElementById('fileInput').click();
+  };
   return (
     <SoilTestingWrap>
       <div className="container_wrap">
@@ -128,15 +121,24 @@ export const SoilTesting = () => {
             </Carousel>
           </div>
           <div className="file_upload_container my-5">
-            <Dragger {...draggerProps} style={{width:"100%"}}>
-              <p className="ant-upload-drag-icon">
-                <UploadOutlined style={{color:"#0000003d"}}/>
-              </p>
-              <p className="ant-upload-text">Click or drag file to this area to upload</p>
-              <p className="ant-upload-hint">
-                Please select a soil image for soil testing.
-              </p>
-            </Dragger>
+       
+              <div className="p-4"  onClick={handleDivClick}>
+              <input
+                id="fileInput"
+                type="file"
+                style={{ display: 'none' }}
+                onChange={handleFileChange}
+                accept="image/*"
+              />
+                <p className="ant-upload-drag-icon">
+                  <UploadOutlined style={{color:"rgb(0 0 0 / 47%)", fontSize:"35px"}}/>
+                </p>
+                <p className="ant-upload-hint">Click or drag file to this area to upload</p>
+                <p className=" ant-upload-text" >
+                  Please select a soil image for soil testing.
+                </p>
+              </div>
+
           </div>
         </div>
       </div>

@@ -98,6 +98,9 @@ const SoilTestingWrap = Styled.div`
     -webkit-background-clip:text;
     background-size:cover;
 }
+.ant-upload-text{
+    color:grey;
+}
 
 `;
 
