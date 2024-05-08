@@ -48,7 +48,7 @@ const LayoutStyle = Styled.div`
         width: ${props => props.mobileOpen ? "240px" : "auto"}
     }
     .main_outlet_container{
-        margin-left: ${props => props.mobileOpen ? "250px" : "5rem"}
+        margin-left: ${props => props.mobileOpen ? "250px" : "5rem"} !important;
     }
     .header_menu_icon{
         cursor: pointer;

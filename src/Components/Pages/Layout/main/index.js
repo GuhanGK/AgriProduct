@@ -92,8 +92,8 @@ const Layout = () => {
     }
 
     const menuItems = [
-        { text: 'Crop Management', icon: <img src={CropImg} alt="Crop Management" width={25}/>, to:"/soiltesting" },
-        { text: 'Pest detection', icon: <img src={PestImg} alt="Crop Management" width={25}/> ,to:"/soiltesting"},
+        { text: 'Crop Management', icon: <img src={CropImg} alt="Crop Management" width={25}/>, to:"/crop-management" },
+        { text: 'Pest detection', icon: <img src={PestImg} alt="Crop Management" width={25}/> ,to:"/soil-testing"},
         { text: 'Soil testing', icon: <img src={SoilImg} alt="Crop Management" width={25}/>, to:"/soil-testing" },
     ];
     let data = localStorage.getItem('userData');
