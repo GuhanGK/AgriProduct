@@ -4,7 +4,7 @@ import { Button, Form } from "react-bootstrap";
 import { DatePicker } from "antd";
 import moment from "moment/moment";
 
-const SelectedCropModal = ({ selectedCrop, setMySelectedCrop, setSowingInput }) => {
+const SelectedCropModal = ({ selectedCrop, setMySelectedCrop, setSowingInput, handleCloseModal }) => {
     const [formInput, setFormInput] = useState()
     console.log("formInput--->", formInput)
 
@@ -15,6 +15,7 @@ const SelectedCropModal = ({ selectedCrop, setMySelectedCrop, setSowingInput }) 
             img: selectedCrop?.img,
             title: selectedCrop?.title
         }])
+        handleCloseModal()
     }
 
     const handleChangeInput = (name, val) => {

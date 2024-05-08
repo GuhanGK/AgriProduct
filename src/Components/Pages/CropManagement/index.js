@@ -85,6 +85,7 @@ const CropManagement = () => {
                         selectedCrop={selectedCrop}
                         setMySelectedCrop={setMySelectedCrop}
                         setSowingInput={setSowingInput}
+                        handleCloseModal={handleCloseModal}
                     />
                 </Modal>
             </CropStyle>
