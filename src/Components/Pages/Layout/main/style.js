@@ -24,6 +24,7 @@ const LayoutStyle = Styled.div`
         gap: 10px;
         .project_header{
             margin-bottom: 0rem;
+            cursor: pointer;
         }
     }
     .profile_wrapp{

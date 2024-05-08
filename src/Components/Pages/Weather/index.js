@@ -3,6 +3,7 @@ import { ReactComponent as CloudImg } from "../../../Assets/Images/cloud.svg";
 import WeatherStyle from "./style";
 import axios from "axios";
 import { Row, Spinner } from "react-bootstrap";
+import Skeleton from 'react-loading-skeleton';
 
 function WeatherDisplay() {
   const [city, setCity] = useState("");
@@ -68,7 +69,7 @@ function WeatherDisplay() {
   };
 
   const fetchWeatherData = async () => {
-    setLoading(true);
+    setLoading(false);
     setError("");
     try {
       const response = await axios.get(
@@ -97,7 +98,23 @@ function WeatherDisplay() {
         {/* 
         {error && <p>{error}</p>} */}
         {loading ?
-            <Spinner animation="border" variant="success" />
+            <div className="loader_skeleton">
+            <h2>
+              {/* Use Skeleton to create placeholder text */}
+              <Skeleton height={40} width={"70%"}/>
+            </h2>
+            <div className="skeleton_loader_second_row mt-4">
+              <Skeleton circle = {true} height={100} width={100} />
+              <div className="w-25">
+                <Skeleton height={40}  />
+                <Skeleton className="mt-2" height={30}  />
+              </div>
+              <p className="w-25">
+                <Skeleton count={4} height={20} width={"100%"}/>
+              </p>
+  
+            </div>       
+          </div>
         :
             <Row className="weather_header_container">
                 <h2 className="text-center weather_place_title">Weather in {weatherData?.name}</h2>
@@ -131,6 +148,7 @@ function WeatherDisplay() {
                 </div>
             </Row>
         }
+        
     </WeatherStyle>
   );
 }

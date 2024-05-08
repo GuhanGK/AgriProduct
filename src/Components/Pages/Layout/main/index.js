@@ -126,7 +126,7 @@ const Layout = () => {
                         >
                             <div className="menu_icon_section">
                                 {!mobileOpen && <MenuIcon className="header_menu_icon" onClick={handleDrawerOpen} />}
-                                <p className="project_header">AgriTech</p>
+                                <p className="project_header" onClick={()=>navigate('/')}>AgriTech</p>
                             </div>
 
                             <Row className="header_navbar_container">

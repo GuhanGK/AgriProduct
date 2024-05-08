@@ -53,7 +53,7 @@ export const SoilTesting = () => {
       text: "Soil testing is the rapid chemical analysis to know the nutrient status & reaction of soil. In the broader sense, it is the evaluation and interpretation of fertilizer recommendations based on soil test values. Through testing, we get to know macro-nutrient values and pH of the soil.",
     },
     {
-      imageUrl: Image3,
+      imageUrl: Image6,
       text: "If you want to test the soil in the laboratory, then you will need to understand the principles for collecting soil sampling. It helps us in taking precise samples from the field for best analysis of the soil properties. Soil is a heterogenous body, therefore there are obvious fluctuations in pH and nutrient availability from place to place even on a farm. Moreover we cannot collect samples from every place in the farm. Therefore, an appropriate division of land is necessary for minimizing the heterogeneity of the soil.",
     },
     {
@@ -65,7 +65,7 @@ export const SoilTesting = () => {
       text: "It is beneficial for farmers as it helps in reducing fertilizer waste and getting the maximum yield possible. However, due to the need for technology and skills, it is not so common among farmers in developing or poor countries. That’s why many brands that sell fertilizers often exploit them by selling larger amounts of fertilizers.",
     },
     {
-      imageUrl: Image6,
+      imageUrl: Image3,
       text: "While performing tests on soil we can not focus only one once component or the other, but for successful interpretition one should perform these tests.\n 1.pH value test \n 2.Moisture content test \n 3.Nutrient content test \n 4.Salinity test \n 5.Structure & texture test \n 6.Pesticides or chemical contamination test, etc",
     },
   ];
@@ -104,7 +104,6 @@ export const SoilTesting = () => {
         {loading && <Spin spinning={loading} fullscreen size="large" />}
 
         <p className="heading_soil">Soil Testing</p>
-        <div className="box "></div>
         <div className="dashboard_container">
           <div className="carousel_box">
             <Carousel className="carousel_Img_container">

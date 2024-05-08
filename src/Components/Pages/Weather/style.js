@@ -1,6 +1,19 @@
-import Styled from 'styled-components';
+import Styled from "styled-components";
 
 const WeatherStyle = Styled.div`
+    .loader_skeleton{
+        width: 100%;
+        padding: 35px;
+        background: #0000002e;
+        border-radius: 8px;
+    }
+   .skeleton_loader_second_row{
+    width:100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items:center;
+    gap:2rem;
+   }
     .cloud_img{
         width: 200px;
         height: 200px;

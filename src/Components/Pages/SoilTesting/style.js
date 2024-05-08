@@ -88,20 +88,11 @@ const SoilTestingWrap = Styled.div`
     bottom:1px;
 
 }
-.box{
-    display: flex;
-    justify-content:
-    height: 50px;
-    width: 50px;
-    background-image:url(${loginLogo}) ;
-    /* background-clip:text; */
-    /* -webkit-background-clip:text; */
-    background-size:cover;
-}
+
 .heading_soil{
     font-size:35px;
     font-weight:900;
-    /* color: transparent; */
+    color: transparent;
     background-image:url(${loginLogo}) ;
     background-clip:text;
     -webkit-background-clip:text;

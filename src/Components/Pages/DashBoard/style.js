@@ -4,6 +4,9 @@ const DashboardStyle = Styled.div`
     .hello_world{
         height: 90vh;
     }
+    .weather_container{
+        width: 80%;
+    }
     .dashboard_container{
         width: 100%;
         display: flex;
@@ -11,6 +14,26 @@ const DashboardStyle = Styled.div`
         justify-content: center;
         align-items: center;
         gap: 15px;
+    }
+    .crop_management_div{
+        width: 80%;
+        display: flex;
+        align-items: stretch;
+        justify-content:center;
+        background: transparent;
+        border-radius:10px;
+    }
+    .crop_data{
+    width: 50%;
+    background: #8080808c;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: space-between;
+}
+    .crop_image{
+        width: 50%;
+        /* height: 200px; */
     }
     
     .carousel_box{
