@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import LayoutStyle from "./style";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import Footer from "../../Footer";
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -44,17 +44,6 @@ const Layout = () => {
     const navigate = useNavigate();  
 
     const isLoggedIn = localStorage.getItem("isLoggedIn");
-    console.log("Login ~ isLoggedIn---->", isLoggedIn)
-  
-  
-    useEffect(()=>{
-      if(isLoggedIn){
-        navigate("/");
-      }
-      else{
-        navigate("/login");
-      }
-    },[isLoggedIn]);
     
     const handleDrawerClose = () => {
         setMobileOpen(false);
@@ -95,9 +84,21 @@ const Layout = () => {
     }
 
     const menuItems = [
-        { text: 'Crop Management', icon: <img src={CropImg} alt="Crop Management" width={25}/> },
-        { text: 'Pest detection', icon: <img src={PestImg} alt="Crop Management" width={25}/> },
-        { text: 'Soil testing', icon: <img src={SoilImg} alt="Crop Management" width={25}/> },
+        { 
+            text: 'Crop Management', 
+            icon: <img src={CropImg} alt="Crop Management" width={25}/>,
+            menuto: "/crop-management",
+        },
+        { 
+            text: 'Pest detection', 
+            icon: <img src={PestImg} alt="Crop Management" width={25}/>,
+            menuto: "/pest-detection",
+        },
+        { 
+            text: 'Soil testing',
+            icon: <img src={SoilImg} alt="Crop Management" width={25}/>,
+            menuto: "/soil-testing",
+        },
     ];
     let data = localStorage.getItem('userData');
     let user;
@@ -145,9 +146,7 @@ const Layout = () => {
                                                 <div className="profile_circle">  
                                                     {user?.name[0]}
                                                 </div>
-                                            </Popover>
-                                      
-                                        
+                                            </Popover>  
                                     </div>
                                 </Navbar>
                             </Row>
@@ -174,6 +173,8 @@ const Layout = () => {
                         {menuItems.map((item, index) => (
                             <ListItem key={index} disablePadding sx={{ display: 'block' }}>
                                 <ListItemButton
+                                    component={Link}
+                                    to={item.menuto}
                                     sx={{
                                         minHeight: 48,
                                         justifyContent: mobileOpen ? 'initial' : 'center',

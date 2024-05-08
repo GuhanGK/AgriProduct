@@ -11,6 +11,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import { Login } from "./Components/Pages/Login";
 import { SignUp } from "./Components/Pages/SignUp";
 import { SoilTesting } from "./Components/Pages/SoilTesting";
+import CropManagement from "./Components/Pages/CropManagement";
 
 export const isOnlineContext = React.createContext();
 
@@ -35,8 +36,9 @@ function App() {
               <Route path="/register" element={<SignUp />} />
               <Route element={<ProtectedRoute />}>
                 <Route path="/" element={<Layout />}>
-                  <Route path="/soiltesting" element={<SoilTesting/>} />
                   <Route path="/" element={<Dashboard />} />
+                  <Route path="/soil-testing" element={<SoilTesting/>} />
+                  <Route path="/crop-management" element={<CropManagement />} />
                 </Route>
               </Route>
             </Route>
