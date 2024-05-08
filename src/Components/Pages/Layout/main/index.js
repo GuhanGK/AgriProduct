@@ -44,7 +44,15 @@ const Layout = () => {
     const navigate = useNavigate();  
 
     const isLoggedIn = localStorage.getItem("isLoggedIn");
-    
+    console.log("Login ~ isLoggedIn---->", isLoggedIn)
+  
+  
+    useEffect(()=>{
+      if(!isLoggedIn){
+        navigate("/login");
+      }     
+    },[isLoggedIn]);
+
     const handleDrawerClose = () => {
         setMobileOpen(false);
     };
@@ -84,21 +92,9 @@ const Layout = () => {
     }
 
     const menuItems = [
-        { 
-            text: 'Crop Management', 
-            icon: <img src={CropImg} alt="Crop Management" width={25}/>,
-            menuto: "/crop-management",
-        },
-        { 
-            text: 'Pest detection', 
-            icon: <img src={PestImg} alt="Crop Management" width={25}/>,
-            menuto: "/pest-detection",
-        },
-        { 
-            text: 'Soil testing',
-            icon: <img src={SoilImg} alt="Crop Management" width={25}/>,
-            menuto: "/soil-testing",
-        },
+        { text: 'Crop Management', icon: <img src={CropImg} alt="Crop Management" width={25}/>, to:"/soiltesting" },
+        { text: 'Pest detection', icon: <img src={PestImg} alt="Crop Management" width={25}/> ,to:"/soiltesting"},
+        { text: 'Soil testing', icon: <img src={SoilImg} alt="Crop Management" width={25}/>, to:"/soil-testing" },
     ];
     let data = localStorage.getItem('userData');
     let user;
@@ -173,8 +169,8 @@ const Layout = () => {
                         {menuItems.map((item, index) => (
                             <ListItem key={index} disablePadding sx={{ display: 'block' }}>
                                 <ListItemButton
-                                    component={Link}
-                                    to={item.menuto}
+                                    title={item.text}
+                                    to={item.to}
                                     sx={{
                                         minHeight: 48,
                                         justifyContent: mobileOpen ? 'initial' : 'center',

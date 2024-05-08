@@ -10,6 +10,10 @@ body{
   height: 40vmin;
   pointer-events: none;
 }
+.main_outlet_container{
+  margin-left: 0px !important;
+  background: #e8ffe88a;
+}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
