@@ -39,6 +39,10 @@ const LayoutStyle = Styled.div`
         align-items: center;
         border-radius: 50%;
         background: #318b458c;
+        cursor: pointer;
+    }
+    .profile_circle:hover{
+        background: #318b458c;
     }
     .sidebar_drawer .css-12i7wg6-MuiPaper-root-MuiDrawer-paper{
         width: ${props => props.mobileOpen ? "240px" : "auto"}
