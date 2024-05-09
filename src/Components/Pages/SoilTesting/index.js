@@ -53,7 +53,6 @@ export const SoilTesting = () => {
         setApiResponse(response.data.data);
       }
     } catch (error) {
-      setApiResponse("Some error occured while testing your soil!!");
       console.log("error while making api call..", error);
       let message = error?.response?.data?.message || "Error while login!!";
       setErrorMsg(message);

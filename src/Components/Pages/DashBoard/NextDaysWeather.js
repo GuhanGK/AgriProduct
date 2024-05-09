@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { ReactComponent as CloudImg } from "../../../Assets/Images/cloud.svg";
-import WeatherStyle from "./style";
+import WeatherStyle from "../Weather/style";
 import axios from "axios";
 import { Row, Spinner } from "react-bootstrap";
 import Skeleton from 'react-loading-skeleton';
 
-function WeatherDisplay() {
-  const [city, setCity] = useState("");
-  const [weatherData, setWeatherData] = useState();
+function NextDaysWeather({location,data}) {
+
+  const [weatherData, setWeatherData] = useState(data);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
 
   const [currentDate, setCurrentDate] = useState('');
 
@@ -22,69 +21,30 @@ function WeatherDisplay() {
 
     return () => clearInterval(interval);
   }, []);
-  console.log("weatherData==>",weatherData)
+  function formatDate(dateString) {
+    const date = new Date(dateString);
+    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const dayOfWeek = days[date.getDay()];
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    const month = months[date.getMonth()];
+    const day = date.getDate();
+    const year = date.getFullYear();
 
-  const API_KEY = "2483d648e19926ffd5ff0e36ca531895";
+    const formattedDate = dayOfWeek + ', ' + day + '-' + month + '-' + year;
+    return formattedDate;
+}
 
-  useEffect(() => {
-    const getLocation = () => {
-        setLoading(true);
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            fetchWeatherDataByCoords(
-              position.coords.latitude,
-              position.coords.longitude
-            );
-          },
-          (error) => {
-            console.error("Error getting user location:", error);
-            setError("Error getting user location. Please try again.");
-          }
-        );
-      } else {
-        setError("Geolocation is not supported by this browser.");
-      }
-    };
-
-    getLocation();
-  }, []);
-
-  const fetchWeatherDataByCoords = async (latitude, longitude) => {
-    setError("");
-    try {
-      const response = await axios.get(
-        `http://127.0.0.1:3000/agri/current_weather`
-      );
-      console.log("fetchWeatherDataByCoords ~ response---->", response.data)
-      console.log("fetchWeatherDataByCoords ~ response---->", response.data.data)
-      setWeatherData(response.data);
-      setLoading(false);
-    } catch (error) {
-      setError("Error fetching weather data. Please try again.");
-      setLoading(false);
-    }
-  };
 
   function kelvinToCelsius(kelvin) {
     return (kelvin - 273.15).toFixed(2);;
 }
+function capitalizeFirstLetter(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+}
 
   return (
     <WeatherStyle className="d-flex justify-content-center">
-      {/* <div className="weather_main_section"> */}
-        {/* <h1>Weather Forecast</h1> */}
-        {/* <input
-          type="text"
-          placeholder="Enter city name"
-          value={city}
-          onChange={(e) => setCity(e.target.value)}
-        />
-        <button type="submit" onSubmit={handleSubmit}>
-          Get Weather
-        </button> */}
-        {/* 
-        {error && <p>{error}</p>} */}
+     
         {loading ?
             <div className="loader_skeleton">
             <h2>
@@ -104,17 +64,18 @@ function WeatherDisplay() {
             </div>       
           </div>
         :
-            <Row className="weather_header_container">
+            <Row className="weather_header_container mb-4">
               <div>
-                <h2 className="text-center weather_place_title">Weather in {weatherData?.location}</h2>
-                <p className="text-center weather_place_data"> {weatherData?.weather}</p>
+                <h2 className="text-center weather_place_title">{formatDate(weatherData?.date)}</h2>
+                <p className="mb-0 current_date_time"></p>
+                <p className="text-center weather_place_data"> {capitalizeFirstLetter(weatherData?.weather)}</p>
               </div>
                 <div className="weather_header"> 
                     <div className="weather_image_side">
                         <CloudImg className="cloud_img" />
                         <div className="weather_temp_value">    
                             <p className="mb-0">{kelvinToCelsius(weatherData?.data?.temp)}°C</p>
-                            <p className="mb-0 current_date_time">{currentDate}</p>
+                            {/* <p className="mb-0 current_date_time">{currentDate}</p> */}
                         </div> 
                     </div>
                     
@@ -150,4 +111,4 @@ function WeatherDisplay() {
   );
 }
 
-export default WeatherDisplay;
+export default NextDaysWeather;
