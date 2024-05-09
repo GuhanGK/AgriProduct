@@ -117,11 +117,13 @@ const CropStyle = Styled.div`
     }
     .my_crop_items{
         position: relative;
+        cursor: pointer;
     }
     .selected_icon{
         position: absolute;
+        font-size: 14px;
         top: -2px;
-        color: green;
+        color: #d40c7e;
     }
     .show_mycrop_container{
         display: flex;

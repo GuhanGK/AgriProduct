@@ -5,9 +5,11 @@ import { DatePicker } from "antd";
 import moment from "moment/moment";
 import ProductMenuItems from "../../../ProductMenu";
 import { CiCircleCheck } from "react-icons/ci";
+import { BsFillPatchCheckFill } from "react-icons/bs";
 
 const SelectedMyCropModal = ({ selectedCrop, setMySelectedCrop, setSowingInput, handleCloseModal }) => {
     const [formInput, setFormInput] = useState()
+    const [getItemIndex, setGetItemIndex] = useState()
     console.log("formInput--->", formInput)
 
     const handleAddCrop = (e) => {
@@ -30,6 +32,10 @@ const SelectedMyCropModal = ({ selectedCrop, setMySelectedCrop, setSowingInput, 
     const handleChangeDate = (date) => {
         handleChangeInput("sowing_Date", moment(date.$d).format('YYYY-MM-DD'));
     };
+
+    const hanldeClickItem = (index) => {
+        setGetItemIndex(index)
+    }
     
   return (
     <CropStyle>
@@ -38,8 +44,8 @@ const SelectedMyCropModal = ({ selectedCrop, setMySelectedCrop, setSowingInput, 
         <div className="selected_mycrop_img">
             {ProductMenuItems.map((item, index) => {
                 return(
-                    <div className="my_crop_items">
-                        <div>
+                    <div className="my_crop_items" key={index}>
+                        <div onClick={() => hanldeClickItem(index)}>
                             <img
                                 src={item?.img}
                                 width={35}
@@ -48,7 +54,7 @@ const SelectedMyCropModal = ({ selectedCrop, setMySelectedCrop, setSowingInput, 
                             />
                             <p>{item?.title}</p>
                         </div>
-                        <CiCircleCheck className="selected_icon"/>
+                        {getItemIndex === index && <BsFillPatchCheckFill className="selected_icon"/>}
                     </div>
                 )})
             }
