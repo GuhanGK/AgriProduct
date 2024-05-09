@@ -4,8 +4,29 @@ const DashboardStyle = Styled.div`
     .hello_world{
         height: 90vh;
     }
+    .modal_wrapp{
+        background:#fff;
+        border-radius: 10px;
+    }
     .weather_container{
         width: 80%;
+    }
+    .header_modal{
+        font-weight:900;
+        font-size:35px;
+    }
+    .header_mdl_row{
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        padding: 10px 20px;
+    }
+    .close_btn_mdl{
+        font-size:35px;
+        cursor:pointer;
+    }
+    .weather_temp_value{
+        justify-content:center !important;
     }
     .dashboard_container{
         width: 100%;
@@ -22,6 +43,10 @@ const DashboardStyle = Styled.div`
         justify-content:center;
         background: transparent;
         border-radius:10px;
+    }
+    .header_modal{
+        /* color:red; */
+        text-align:center;
     }
     .crop_data{
     width: 50%;

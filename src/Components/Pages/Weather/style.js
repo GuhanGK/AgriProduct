@@ -14,6 +14,10 @@ const WeatherStyle = Styled.div`
     align-items:center;
     gap:2rem;
    }
+   .weather_place_data{
+    font-size:18px;
+    color:#fff;
+   }
     .cloud_img{
         width: 200px;
         height: 200px;
@@ -74,7 +78,7 @@ const WeatherStyle = Styled.div`
     }
     .weather_deatils_data{
         display: flex;
-        justify-content: space-between;
+        justify-content: space-around;
     }
 `;
 
