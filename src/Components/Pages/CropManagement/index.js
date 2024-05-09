@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import CropStyle from "./Style";
-import { Modal, Row } from "react-bootstrap";
+import { Modal, Row, Spinner } from "react-bootstrap";
 import ProductMenuItems from "../../../ProductMenu";
 import { FaPlus } from "react-icons/fa6";
 import SelectedCropModal from "./SelectedCrop";
@@ -9,7 +9,7 @@ import SelectedMyCropModal from "./MyCropModal";
 import ShowMyCrop from "./ShowMyCrop";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { setAllCropDataData } from "../../../Redux/TrackingRedux";
+import { setAllCropDataData, setMyCropDataData } from "../../../Redux/TrackingRedux";
 import ShowAllCrop from "./ShowAllCrops";
 
 const CropManagement = () => {
@@ -20,11 +20,13 @@ const CropManagement = () => {
     const [openAllCrop, setOpenAllCrop] = useState(false)
     const [selectAllCrop, setSelectAllCrop] = useState()
     const [selectedCrop, setSelectedCrop] = useState("")
-    const [sowingInput, setSowingInput] = useState()
+    const [sowingInput, setSowingInput] = useState();
+    const [loading, setLoading] = useState(false);
+
     const [mySelectedCrop, setMySelectedCrop] = useState([
         {
             img: Rise,
-            title: "Rise"
+            title: "Rice"
         }
     ])
 
@@ -35,19 +37,41 @@ const CropManagement = () => {
     const handleCloseMyCropItem = () => setOpenMyCropItem(false)
     const handleCloseAllCrop = () => setOpenAllCrop(false)
 
-    const allCropDataData = useSelector((state) => state.tracking.getAllCropData)
+    const allCropDataData = useSelector((state) => state.tracking.getAllCropData);
+    const myCropDataData = useSelector((state) => state.tracking.getMyCropData);
+    console.log("CropManagement ~ myCropDataData---->", myCropDataData)
+    let data = localStorage.getItem('userData');
+    let user;
+    if(data){
+        user = JSON.parse(data);
+    }
 
+    console.log("loading==>", loading)
     useEffect(() => {
         const fetchData = async () => {
+            setLoading(true);
             const URL = "http://127.0.0.1:3000/agri/allcrops";
+            const URL2 = `http://127.0.0.1:3000/agri/getmycrops?emailId=${user?.emailId}`;
             try{
-                const response = await axios.get(URL)
+                const response = await axios.get(URL);
+                const myCropsresponse = await axios.get(URL2);
+
                 if(response.status){
-                    console.log("response---->", response)
-                    dispatch(setAllCropDataData(response.data)) 
+                    console.log("response all crops---->", response)
+                    dispatch(setAllCropDataData(response.data)) ;
+                    setLoading(false);
+
+                }
+                if(myCropsresponse.status){
+                    console.log("response all crops---->", myCropsresponse.data.data)
+                    dispatch(setMyCropDataData(myCropsresponse.data.data)) ;
+                    setLoading(false);
+
                 }
             }catch(error){
                 console.log("error--->", error)
+                setLoading(false);
+
             }
         }
 
@@ -67,9 +91,15 @@ const CropManagement = () => {
     }
 
     console.log("allCropDataData--->", allCropDataData)
+    console.log("allCropDataData--->", allCropDataData)
 
     return(
-        <>
+        <>{
+            loading? 
+            <div className="d-flex justify-content-center  w-100">
+                <Spinner  size="lg"/>
+            </div>
+            :
             <CropStyle>
                 <Row className="crop_container">
                     <h1 className="content_title">Crop Management</h1>
@@ -77,6 +107,11 @@ const CropManagement = () => {
                     <div className="crop_manage_container">
                         <div className="crop_item_container">
                             <div className="crop_item_section">
+                                {/* {allCropDataData.map((item)=>{
+                                    return(
+
+                                    )
+                                })} */}
                                 {ProductMenuItems.map((item, index) => {
                                     return(
                                         <div key={index} className="crop_item_box" onClick={() =>{ setOpenModal(!openModal); handleSelectCropItem(item)}}>
@@ -98,11 +133,14 @@ const CropManagement = () => {
                         <h2>My Crops</h2>
                         <div className="mycrop_item_container">
                             <div className="mycrop_item_section">
-                                {mySelectedCrop.map((item, index) => {
+                                {myCropDataData?.map((item, index) => {
+                                    console.log("teemmmm=>", item)
+                                   let imageUrl = ProductMenuItems.filter((items)=>item.cropName === items.title);
+                                    console.log("{myCropDataData?.data?.map ~ imageUrl---->", imageUrl)
                                     return(
-                                        <div key={index} className="crop_item_box" onClick={() => {setSelectedCrop(item); setOpenMyCropItem(!openMyCropItem)}}>
-                                            <img src={item.img} alt={item.title} width={50} height={100} />
-                                            <p className="crop_item_title">{item.title}</p>
+                                        <div key={index} className="crop_item_box" onClick={() => {setSelectedCrop(imageUrl[0]); setOpenMyCropItem(!openMyCropItem)}}>
+                                            <img src={imageUrl[0]?.img} alt={item?.title} width={50} height={100} />
+                                            <p className="crop_item_title">{item?.cropName}</p>
                                         </div>
                                     )
                                 })}
@@ -119,7 +157,7 @@ const CropManagement = () => {
                     show={openModal} 
                     onHide={handleCloseModal}
                     centered
-                    className="selected_crop_modal"
+                    className="selected_crop_modal mt-5"
                 >
                     <SelectedCropModal 
                         selectedCrop={selectedCrop}
@@ -132,7 +170,7 @@ const CropManagement = () => {
                     show={openMyCropItem} 
                     onHide={handleCloseMyCropItem}
                     centered
-                    className="selected_crop_modal"
+                    className="selected_crop_modal mt-5"
                 >
                     <ShowMyCrop 
                         selectedCrop={selectedCrop}
@@ -143,7 +181,7 @@ const CropManagement = () => {
                     show={openMyCropModal} 
                     onHide={handleCloseMyCropModal}
                     centered
-                    className="selected_crop_modal"
+                    className="selected_crop_modal mt-5"
                 >
                     <SelectedMyCropModal 
                         selectedCrop={selectedCrop}
@@ -157,7 +195,7 @@ const CropManagement = () => {
                     show={openAllCrop} 
                     onHide={handleCloseAllCrop}
                     centered
-                    className="selected_crop_modal"
+                    className="selected_crop_modal mt-5"
                 >
                     <ShowAllCrop 
                         setSelectAllCrop={setSelectAllCrop}
@@ -167,6 +205,7 @@ const CropManagement = () => {
                     />
                 </Modal>
             </CropStyle>
+        }
         </>
     )
 } 

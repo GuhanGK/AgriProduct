@@ -6,11 +6,15 @@ import moment from "moment/moment";
 import ProductMenuItems from "../../../ProductMenu";
 import { BsFillPatchCheckFill } from "react-icons/bs";
 import axios from "axios";
+import { setMyCropDataData } from "../../../Redux/TrackingRedux";
+import { useDispatch, useSelector } from "react-redux";
 
 const SelectedMyCropModal = ({ selectedCrop, setMySelectedCrop, setSowingInput, handleCloseModal }) => {
     const [formInput, setFormInput] = useState()
     const [getItemIndex, setGetItemIndex] = useState()
     const [getItem, setGetItem] = useState()
+    const dispatch = useDispatch();
+    const myCropDataData = useSelector((state) => state.tracking.getMyCropData);
     console.log("formInput--->", formInput)
 
     let data = localStorage.getItem('userData');
@@ -19,34 +23,34 @@ const SelectedMyCropModal = ({ selectedCrop, setMySelectedCrop, setSowingInput, 
         user = JSON.parse(data);
     }
 
-    const handleAddCrop = async(e) => {
-        e.preventDefault()
-        setSowingInput(formInput)
-        const URL = "http://127.0.0.1:3000/agri/addmycrops";
-        try{
-            const obj = {
-                "emailId": user?.emailId,
-                "cropName": selectedCrop?.title,
-                "sowingDate": formInput.sowing_Date,
-                "area": formInput.acre,
-                "surveyNumber": formInput.survey
-            }
-            console.log("obj--->", obj)
+    // const handleAddCrop = async(e) => {
+    //     e.preventDefault()
+    //     setSowingInput(formInput)
+    //     const URL = "http://127.0.0.1:3000/agri/addmycrops";
+    //     try{
+    //         const obj = {
+    //             "emailId": user?.emailId,
+    //             "cropName": selectedCrop?.title,
+    //             "sowingDate": formInput.sowing_Date,
+    //             "area": formInput.acre,
+    //             "surveyNumber": formInput.survey
+    //         }
+    //         console.log("obj--->", obj)
 
-            const response = await axios.post(URL,obj)
-            if(response.status){
-                console.log("response---->", response)
+    //         const response = await axios.post(URL,obj)
+    //         if(response.status){
+    //             console.log("response---->", response)
                 
-            }
-        }catch(error){
-            console.log("error--->", error)
-        }
-        setMySelectedCrop(prev => [...prev, {
-            img: selectedCrop?.img,
-            title: selectedCrop?.title
-        }])
-        handleCloseModal()
-    }
+    //         }
+    //     }catch(error){
+    //         console.log("error--->", error)
+    //     }
+    //     setMySelectedCrop(prev => [...prev, {
+    //         img: selectedCrop?.img,
+    //         title: selectedCrop?.title
+    //     }])
+    //     handleCloseModal()
+    // }
 
     const handleChangeInput = (name, val) => {
         setFormInput((prev) => ({
@@ -63,6 +67,38 @@ const SelectedMyCropModal = ({ selectedCrop, setMySelectedCrop, setSowingInput, 
         setGetItemIndex(index)
         setGetItem(item)
     }
+    const handleAddCrop = async(e) => {
+      e.preventDefault()
+      setSowingInput(formInput)
+      const URL = "http://127.0.0.1:3000/agri/addmycrops";
+      try{
+          const obj = {
+              "emailId": user?.emailId,
+              "cropName": getItem?.title,
+              "sowingDate": formInput.sowing_Date,
+              "area": formInput.acre,
+              "surveyNumber": formInput.survey
+          }
+          console.log("obj--->", obj)
+
+          const response = await axios.post(URL,obj)
+          if(response.status){
+              console.log("response---->", response)
+              const newData = [obj,...myCropDataData];
+              console.log("handleAddCrop ~ newData---->", newData)
+              
+              dispatch(setMyCropDataData(newData));
+              handleCloseModal();
+          }
+      }catch(error){
+          console.log("error--->", error)
+      }
+      setMySelectedCrop(prev => [...prev, {
+          img: selectedCrop?.img,
+          title: selectedCrop?.title
+      }])
+      handleCloseModal()
+  }
     
   return (
     <CropStyle>
