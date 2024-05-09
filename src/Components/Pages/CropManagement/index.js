@@ -89,6 +89,7 @@ const CropManagement = () => {
                             
                             <div className="crop_item_plus_box" onClick={handleOpenSelectCrop}>
                                 <FaPlus className="plus_icon"/>
+                                <span>{ProductMenuItems.length}</span>
                             </div>
                         </div>
                     </div>

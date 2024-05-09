@@ -52,6 +52,7 @@ const CropStyle = Styled.div`
     }
     .crop_item_plus_box{
         display: flex;
+        // flex-direction: column;
         justify-content: center;
         align-items: center;
         margin-right: 10px;
