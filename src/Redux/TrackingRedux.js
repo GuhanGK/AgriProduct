@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
     eventAttendanceData: [],
     getAllCropData: [],
+    getMyCropData: [],
 };
 
 export const trackingSlice = createSlice({
@@ -21,6 +22,12 @@ export const trackingSlice = createSlice({
                 getAllCropData: action.payload,
             };
         },
+        setMyCropDataData: (state, action) => {
+            return {
+                ...state,
+                getMyCropData: action.payload,
+            };
+        },
     },
 });
 
@@ -28,7 +35,8 @@ export
     const
     {
         setEventAttendanceData,
-        setAllCropDataData
+        setAllCropDataData,
+        setMyCropDataData
     }
         = trackingSlice.actions
 

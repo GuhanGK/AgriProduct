@@ -4,10 +4,14 @@ import { Button, Form } from "react-bootstrap";
 import { DatePicker } from "antd";
 import moment from "moment/moment";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { setMyCropDataData } from "../../../Redux/TrackingRedux";
 
 const SelectedCropModal = ({ selectedCrop, setMySelectedCrop, setSowingInput, handleCloseModal }) => {
-    const [formInput, setFormInput] = useState()
+    const [formInput, setFormInput] = useState();
+    const dispatch = useDispatch();
     console.log("formInput--->", formInput)
+    const myCropDataData = useSelector((state) => state.tracking.getMyCropData);
 
     let data = localStorage.getItem('userData');
     let user;
@@ -32,7 +36,10 @@ const SelectedCropModal = ({ selectedCrop, setMySelectedCrop, setSowingInput, ha
             const response = await axios.post(URL,obj)
             if(response.status){
                 console.log("response---->", response)
+                const newData = [obj,...myCropDataData];
+                console.log("handleAddCrop ~ newData---->", newData)
                 
+                dispatch(setMyCropDataData(newData));
             }
         }catch(error){
             console.log("error--->", error)
