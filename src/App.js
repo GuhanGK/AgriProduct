@@ -13,6 +13,7 @@ import { SignUp } from "./Components/Pages/SignUp";
 import { SoilTesting } from "./Components/Pages/SoilTesting";
 import PestDetection  from "./Components/Pages/PestDetection";
 import CropManagement from "./Components/Pages/CropManagement";
+import AdminPanel from "./Components/Pages/Admin";
 
 export const isOnlineContext = React.createContext();
 
@@ -38,6 +39,7 @@ function App() {
               <Route element={<ProtectedRoute />}>
                 <Route path="/" element={<Layout />}>
                   <Route path="/" element={<Dashboard />} />
+                  <Route path="/admin" element={<AdminPanel/>} />
                   <Route path="/soil-testing" element={<SoilTesting/>} />
                   <Route path="/pest-detection" element={<PestDetection/>} />
                   <Route path="/crop-management" element={<CropManagement />} />

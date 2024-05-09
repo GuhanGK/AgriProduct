@@ -27,6 +27,7 @@ import { setUserData } from "../../../../Redux/AuthRedux";
 import CropImg from "../../../../Assets/Images/cropImg.png";
 import PestImg from "../../../../Assets/Images/pestImg.png";
 import SoilImg from "../../../../Assets/Images/soiltesting.png";
+import Admin from "../../../../Assets/Images/admin.png";
 const drawerWidth = 240;
 
 const DrawerHeader = styled('div')(({ theme }) => ({
@@ -92,6 +93,7 @@ const Layout = () => {
     }
 
     const menuItems = [
+        { text: 'Admin', icon: <img src={Admin} alt="Admin" width={25}/>, to:"/admin" },
         { text: 'Crop Management', icon: <img src={CropImg} alt="Crop Management" width={25}/>, to:"/crop-management" },
         { text: 'Pest detection', icon: <img src={PestImg} alt="Crop Management" width={25}/> ,to:"/pest-detection"},
         { text: 'Soil testing', icon: <img src={SoilImg} alt="Crop Management" width={25}/>, to:"/soil-testing" },
