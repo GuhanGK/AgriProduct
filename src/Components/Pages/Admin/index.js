@@ -1,7 +1,12 @@
-import { Table, Tabs } from "antd";
+import { Table } from "antd";
 import React, { useState } from "react";
-import { Button, Modal } from "react-bootstrap";
-import UserDetailsModal from "./UserDetailsModal";
+import Accordion from "@mui/material/Accordion";
+import AccordionActions from "@mui/material/AccordionActions";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import Button from "@mui/material/Button";
+import UserDetailsStyle from "./style";
 
 const AdminPanel = () => {
   const [openUserModal, setOpenUserModal] = useState(false);
@@ -10,39 +15,41 @@ const AdminPanel = () => {
   const dataSource = [
     {
       key: "1",
-      name: "Mike",
-      email: "mike@gmail.com",
-      number: "98362974822",
+      name: "Tomatoe",
+      sowing: "2024-04-12",
+      survey: "SRN4863",
     },
     {
       key: "2",
-      name: "John",
-      email: "john@gmail.com",
-      number: "76398267302",
+      name: "Onion",
+      sowing: "2024-04-12",
+      survey: "SRN4864",
     },
   ];
 
   const columns = [
     {
-      title: "Name",
+      title: "Crop Name",
       dataIndex: "name",
       key: "name",
     },
     {
-      title: "Email ID",
-      dataIndex: "email",
-      key: "email",
+      title: "Sowing Date",
+      dataIndex: "sowing",
+      key: "sowing",
     },
     {
-      title: "Phone Number",
-      dataIndex: "number",
-      key: "number",
+      title: "Survey Number",
+      dataIndex: "survey",
+      key: "survey",
     },
     {
       title: "Action",
       key: "action",
       render: (text, record) => (
-        <Button onClick={() => handleView(record)}>View</Button>
+        <div className="">
+          <Button onClick={() => handleView(record)}>View</Button>
+        </div>
       ),
     },
   ];
@@ -54,20 +61,56 @@ const AdminPanel = () => {
 
   return (
     <>
-      <div>
-        <p>Users</p>
+      <UserDetailsStyle>
         <div>
-          <Table dataSource={dataSource} columns={columns} />
+          <p>Users</p>
+          {/* <div>
+            <Table dataSource={dataSource} columns={columns} />
+          </div> */}
+          <Accordion>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1-content"
+              id="panel1-header"
+              className=""
+            >
+              <div className="profile_circle_container">
+                <div className="profile_circle">
+                  <p className="profile_circle_letter">D</p>
+                </div>
+                <div className="text-left">
+                  <p className="userId_name mb-0">demouser@gmail.com</p>
+                </div>
+              </div>
+            </AccordionSummary>
+            <AccordionDetails>
+              <p className="crops_header">Crops:</p>
+              <div className="text-left mb-2 w-100 d-flex justify-content-between align-items-center">
+                <div>
+                    <p className="user_crops_details mb-0">1. Tomato</p>
+                    <span className="span_survey_number">SRN4863</span>
+                </div>
+                <div className="between_line"></div>
+                <div>
+                    <p className="user_crops_details mb-0">2024-05-10</p>
+                    <span className="span_survey_number">Acre 2</span>
+                </div>
+              </div>
+              <div className="text-left mb-2 w-100 d-flex justify-content-between align-items-center">
+                <div>
+                    <p className="user_crops_details mb-0">2. Onion</p>
+                    <span className="span_survey_number">SRN4863</span>
+                </div>
+                <div className="between_line"></div>
+                <div>
+                    <p className="user_crops_details mb-0">2024-05-10</p>
+                    <span className="span_survey_number">Acre 1</span>
+                </div>
+              </div>
+            </AccordionDetails>
+          </Accordion>
         </div>
-      </div>
-      <Modal
-        show={openUserModal}
-        onHide={handleCloseModal}
-        centered
-        className="selected_crop_modal"
-      >
-        <UserDetailsModal />
-      </Modal>
+      </UserDetailsStyle>
     </>
   );
 };
