@@ -28,6 +28,7 @@ import CropImg from "../../../../Assets/Images/cropImg.png";
 import PestImg from "../../../../Assets/Images/pestImg.png";
 import SoilImg from "../../../../Assets/Images/soiltesting.png";
 import Admin from "../../../../Assets/Images/admin.png";
+import Dashboard from "../../../../Assets/Images/dashboard.png";
 const drawerWidth = 240;
 
 const DrawerHeader = styled('div')(({ theme }) => ({
@@ -93,6 +94,7 @@ const Layout = () => {
     }
 
     const menuItems = [
+        { text: 'Dashboard', icon: <img src={Dashboard} alt="Dashboard" width={25}/>, to:"/" },
         { text: 'Admin', icon: <img src={Admin} alt="Admin" width={25}/>, to:"/admin" },
         { text: 'Crop Management', icon: <img src={CropImg} alt="Crop Management" width={25}/>, to:"/crop-management" },
         { text: 'Pest detection', icon: <img src={PestImg} alt="Crop Management" width={25}/> ,to:"/pest-detection"},
