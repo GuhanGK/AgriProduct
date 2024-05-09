@@ -5,7 +5,7 @@ import { jwtDecode } from 'jwt-decode'
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { setUserData } from "../../../Redux/AuthRedux";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 export const Login = () => {
   const [form] = Form.useForm();

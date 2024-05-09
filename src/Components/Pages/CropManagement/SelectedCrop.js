@@ -3,14 +3,40 @@ import CropStyle from "./Style";
 import { Button, Form } from "react-bootstrap";
 import { DatePicker } from "antd";
 import moment from "moment/moment";
+import axios from "axios";
 
 const SelectedCropModal = ({ selectedCrop, setMySelectedCrop, setSowingInput, handleCloseModal }) => {
     const [formInput, setFormInput] = useState()
     console.log("formInput--->", formInput)
 
-    const handleAddCrop = (e) => {
+    let data = localStorage.getItem('userData');
+    let user;
+    if(data){
+        user = JSON.parse(data);
+    }
+
+    const handleAddCrop = async(e) => {
         e.preventDefault()
         setSowingInput(formInput)
+        const URL = "http://127.0.0.1:3000/agri/addmycrops";
+        try{
+            const obj = {
+                "emailId": user?.emailId,
+                "cropName": selectedCrop?.title,
+                "sowingDate": formInput.sowing_Date,
+                "area": formInput.acre,
+                "surveyNumber": formInput.survey
+            }
+            console.log("obj--->", obj)
+
+            const response = await axios.post(URL,obj)
+            if(response.status){
+                console.log("response---->", response)
+                
+            }
+        }catch(error){
+            console.log("error--->", error)
+        }
         setMySelectedCrop(prev => [...prev, {
             img: selectedCrop?.img,
             title: selectedCrop?.title

@@ -4,17 +4,43 @@ import { Button, Form } from "react-bootstrap";
 import { DatePicker } from "antd";
 import moment from "moment/moment";
 import ProductMenuItems from "../../../ProductMenu";
-import { CiCircleCheck } from "react-icons/ci";
 import { BsFillPatchCheckFill } from "react-icons/bs";
+import axios from "axios";
 
 const SelectedMyCropModal = ({ selectedCrop, setMySelectedCrop, setSowingInput, handleCloseModal }) => {
     const [formInput, setFormInput] = useState()
     const [getItemIndex, setGetItemIndex] = useState()
+    const [getItem, setGetItem] = useState()
     console.log("formInput--->", formInput)
 
-    const handleAddCrop = (e) => {
+    let data = localStorage.getItem('userData');
+    let user;
+    if(data){
+        user = JSON.parse(data);
+    }
+
+    const handleAddCrop = async(e) => {
         e.preventDefault()
         setSowingInput(formInput)
+        const URL = "http://127.0.0.1:3000/agri/addmycrops";
+        try{
+            const obj = {
+                "emailId": user?.emailId,
+                "cropName": selectedCrop?.title,
+                "sowingDate": formInput.sowing_Date,
+                "area": formInput.acre,
+                "surveyNumber": formInput.survey
+            }
+            console.log("obj--->", obj)
+
+            const response = await axios.post(URL,obj)
+            if(response.status){
+                console.log("response---->", response)
+                
+            }
+        }catch(error){
+            console.log("error--->", error)
+        }
         setMySelectedCrop(prev => [...prev, {
             img: selectedCrop?.img,
             title: selectedCrop?.title
@@ -33,8 +59,9 @@ const SelectedMyCropModal = ({ selectedCrop, setMySelectedCrop, setSowingInput, 
         handleChangeInput("sowing_Date", moment(date.$d).format('YYYY-MM-DD'));
     };
 
-    const hanldeClickItem = (index) => {
+    const hanldeClickItem = (index, item) => {
         setGetItemIndex(index)
+        setGetItem(item)
     }
     
   return (
@@ -45,7 +72,7 @@ const SelectedMyCropModal = ({ selectedCrop, setMySelectedCrop, setSowingInput, 
             {ProductMenuItems.map((item, index) => {
                 return(
                     <div className="my_crop_items" key={index}>
-                        <div onClick={() => hanldeClickItem(index)}>
+                        <div onClick={() => hanldeClickItem(index, item)}>
                             <img
                                 src={item?.img}
                                 width={35}
@@ -58,7 +85,6 @@ const SelectedMyCropModal = ({ selectedCrop, setMySelectedCrop, setSowingInput, 
                     </div>
                 )})
             }
-            <p className="crop_item_title">{selectedCrop?.title}</p>
         </div>
 
         <Form onSubmit={(e) => handleAddCrop(e)}>

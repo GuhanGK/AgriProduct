@@ -15,6 +15,12 @@ const CropStyle = Styled.div`
         border-radius: 8px;
         background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(77,195,30,1) 0%, rgba(66,197,62,1) 13%, rgba(0,212,255,1) 96%);
     }
+    .mycrop_manage_container{
+        width: 100%;
+        border-radius: 8px;
+        background: #d2f8d2;
+        // background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(77,195,30,1) 0%, rgba(66,197,62,1) 13%, rgba(0,212,255,1) 96%);
+    }
     .crop_item_container {
         display: flex;
         border-radius: 8px;
@@ -27,7 +33,7 @@ const CropStyle = Styled.div`
     .crop_item_section{
         display: flex;
         width: 100%;
-        overflow-x: scroll;
+        overflow-x: hidden;
         text-overflow: ellipsis; 
         white-space: nowrap;
     }
@@ -110,6 +116,7 @@ const CropStyle = Styled.div`
         overflow-x: scroll;
         text-overflow: ellipsis; 
         white-space: nowrap;
+        padding: 1rem 0.5rem;
     }
     .selected_mycrop_img::-webkit-scrollbar {
         width: 0px;
@@ -118,6 +125,10 @@ const CropStyle = Styled.div`
     .my_crop_items{
         position: relative;
         cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
     }
     .selected_icon{
         position: absolute;
@@ -153,6 +164,14 @@ const CropStyle = Styled.div`
 
     .show_mycrop_header{
         text-align: center;
+    }
+
+    .allcrop_item_section{
+        width: 100%;
+        height: 380px;
+        overflow-y: auto;
+        display: flex;
+        flex-wrap: wrap;
     }
 `;
 
