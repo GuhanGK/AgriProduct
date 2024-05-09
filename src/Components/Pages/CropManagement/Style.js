@@ -103,6 +103,55 @@ const CropStyle = Styled.div`
         width: 0px;
         background: transparent; /* make scrollbar transparent */
     }
+
+    .selected_mycrop_img{
+        display: flex;
+        gap: 10px;
+        overflow-x: scroll;
+        text-overflow: ellipsis; 
+        white-space: nowrap;
+    }
+    .selected_mycrop_img::-webkit-scrollbar {
+        width: 0px;
+        background: transparent; /* make scrollbar transparent */
+    }
+    .my_crop_items{
+        position: relative;
+    }
+    .selected_icon{
+        position: absolute;
+        top: -2px;
+        color: green;
+    }
+    .show_mycrop_container{
+        display: flex;
+        // justify-content: center;
+        align-items: center;
+        gap: 12px;
+        padding: 12px;
+    }
+    .show_mycrop_img{
+        width: 100px;
+        height: 100px;
+        display: flex;
+        // flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: #d2f8d2;
+        padding: 8px;
+        border-radius: 50%;
+        box-shadow: 0px 3px 6px #00000029;
+    }
+
+    .survey_details_sec{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .show_mycrop_header{
+        text-align: center;
+    }
 `;
 
 export default CropStyle;

@@ -3,8 +3,10 @@ import CropStyle from "./Style";
 import { Button, Form } from "react-bootstrap";
 import { DatePicker } from "antd";
 import moment from "moment/moment";
+import ProductMenuItems from "../../../ProductMenu";
+import { CiCircleCheck } from "react-icons/ci";
 
-const SelectedCropModal = ({ selectedCrop, setMySelectedCrop, setSowingInput, handleCloseModal }) => {
+const SelectedMyCropModal = ({ selectedCrop, setMySelectedCrop, setSowingInput, handleCloseModal }) => {
     const [formInput, setFormInput] = useState()
     console.log("formInput--->", formInput)
 
@@ -32,15 +34,25 @@ const SelectedCropModal = ({ selectedCrop, setMySelectedCrop, setSowingInput, ha
   return (
     <CropStyle>
       <div className="selected_crop_modal_body">
-        <p>Selected Crop:</p>
-        <div className="selected_crop_img">
-          <img
-            src={selectedCrop?.img}
-            width={50}
-            height={100}
-            alt="SelectedCrop"
-          />
-          <p className="crop_item_title">{selectedCrop?.title}</p>
+        <p>Which Crop are you growing:</p>
+        <div className="selected_mycrop_img">
+            {ProductMenuItems.map((item, index) => {
+                return(
+                    <div className="my_crop_items">
+                        <div>
+                            <img
+                                src={item?.img}
+                                width={35}
+                                height={35}
+                                alt="SelectedCrop"
+                            />
+                            <p>{item?.title}</p>
+                        </div>
+                        <CiCircleCheck className="selected_icon"/>
+                    </div>
+                )})
+            }
+            <p className="crop_item_title">{selectedCrop?.title}</p>
         </div>
 
         <Form onSubmit={(e) => handleAddCrop(e)}>
@@ -81,4 +93,4 @@ const SelectedCropModal = ({ selectedCrop, setMySelectedCrop, setSowingInput, ha
   );
 };
 
-export default SelectedCropModal;
+export default SelectedMyCropModal;

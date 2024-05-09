@@ -5,9 +5,13 @@ import ProductMenuItems from "../../../ProductMenu";
 import { FaPlus } from "react-icons/fa6";
 import SelectedCropModal from "./SelectedCrop";
 import Rise from "../../../Assets/Images/rice.png"
+import SelectedMyCropModal from "./MyCropModal";
+import ShowMyCrop from "./ShowMyCrop";
 
 const CropManagement = () => {
     const [openModal, setOpenModal] = useState(false)
+    const [openMyCropModal, setOpenMyModal] = useState(false)
+    const [openMyCropItem, setOpenMyCropItem] = useState(false)
     const [selectedCrop, setSelectedCrop] = useState()
     const [sowingInput, setSowingInput] = useState()
     const [mySelectedCrop, setMySelectedCrop] = useState([
@@ -20,6 +24,8 @@ const CropManagement = () => {
     console.log("mySelectedCrop--->", mySelectedCrop)
     console.log("sowingInput--->", sowingInput)
     const handleCloseModal = () => setOpenModal(false)
+    const handleCloseMyCropModal = () => setOpenMyModal(false)
+    const handleCloseMyCropItem = () => setOpenMyCropItem(false)
 
     const handleSelectCropItem = (item) => {
         setSelectedCrop(item)
@@ -27,6 +33,10 @@ const CropManagement = () => {
 
     const handleOpenSelectCrop = () => {
 
+    }
+
+    const handleOpenMySelectCrop = () => {
+        setOpenMyModal(!openMyCropModal)
     }
 
     return(
@@ -60,7 +70,7 @@ const CropManagement = () => {
                             <div className="mycrop_item_section">
                                 {mySelectedCrop.map((item, index) => {
                                     return(
-                                        <div key={index} className="crop_item_box">
+                                        <div key={index} className="crop_item_box" onClick={() => {setSelectedCrop(item); setOpenMyCropItem(!openMyCropItem)}}>
                                             <img src={item.img} alt={item.title} width={50} height={100} />
                                             <p className="crop_item_title">{item.title}</p>
                                         </div>
@@ -69,7 +79,7 @@ const CropManagement = () => {
                             </div>
                             
                             <div className="crop_item_plus_box">
-                                <FaPlus className="plus_icon" onClick={handleOpenSelectCrop}/>
+                                <FaPlus className="plus_icon" onClick={handleOpenMySelectCrop}/>
                             </div>
                         </div>
                     </div>
@@ -86,6 +96,27 @@ const CropManagement = () => {
                         setMySelectedCrop={setMySelectedCrop}
                         setSowingInput={setSowingInput}
                         handleCloseModal={handleCloseModal}
+                    />
+                </Modal>
+                <Modal 
+                    show={openMyCropItem} 
+                    onHide={handleCloseMyCropItem}
+                    centered
+                    className="selected_crop_modal"
+                >
+                    <ShowMyCrop selectedCrop={selectedCrop}/>
+                </Modal>
+                <Modal 
+                    show={openMyCropModal} 
+                    onHide={handleCloseMyCropModal}
+                    centered
+                    className="selected_crop_modal"
+                >
+                    <SelectedMyCropModal 
+                        selectedCrop={selectedCrop}
+                        setMySelectedCrop={setMySelectedCrop}
+                        setSowingInput={setSowingInput}
+                        handleCloseModal={handleCloseMyCropModal}
                     />
                 </Modal>
             </CropStyle>
