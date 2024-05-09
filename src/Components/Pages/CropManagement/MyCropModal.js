@@ -103,7 +103,7 @@ const SelectedMyCropModal = ({ selectedCrop, setMySelectedCrop, setSowingInput, 
   return (
     <CropStyle>
       <div className="selected_crop_modal_body">
-        <p>Which Crop are you growing:</p>
+        <p className="my_add_crop_header">Which Crop are you growing:</p>
         <div className="selected_mycrop_img">
             {ProductMenuItems.map((item, index) => {
                 return(
@@ -114,6 +114,7 @@ const SelectedMyCropModal = ({ selectedCrop, setMySelectedCrop, setSowingInput, 
                                 width={35}
                                 height={35}
                                 alt="SelectedCrop"
+                                className="my_products_img"
                             />
                             <p>{item?.title}</p>
                         </div>
@@ -122,7 +123,7 @@ const SelectedMyCropModal = ({ selectedCrop, setMySelectedCrop, setSowingInput, 
                 )})
             }
         </div>
-
+        <br />
         <Form onSubmit={(e) => handleAddCrop(e)}>
           <Form.Group
             controlId="formBasicPassword"

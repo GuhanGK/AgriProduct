@@ -6,6 +6,18 @@ const CropStyle = Styled.div`
         flex-direction: column;
         gap: 10px;
     }    
+    .products_img{
+        width: 70%;
+        aspect-ratio: 3 / 2;
+        object-fit: contain;
+        // mix-blend-mode: color-burn;
+    }
+    .my_products_img{
+        width: 70%;
+        aspect-ratio: 3 / 2;
+        object-fit: contain;
+        // mix-blend-mode: color-burn;
+    }
     .content_title{
         width: 100%;
         text-align: center;
@@ -44,6 +56,10 @@ const CropStyle = Styled.div`
     }
     .crop_item_box {
         flex: 0 0 auto; 
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
         margin-right: 10px;
         width: 135px;
         border-radius: 50%;
@@ -119,10 +135,10 @@ const CropStyle = Styled.div`
         white-space: nowrap;
         padding: 1rem 0.5rem;
     }
-    .selected_mycrop_img::-webkit-scrollbar {
-        width: 0px;
-        background: transparent; /* make scrollbar transparent */
-    }
+    // .selected_mycrop_img::-webkit-scrollbar {
+    //     width: 0px;
+    //     background: transparent;
+    // }
     .my_crop_items{
         position: relative;
         cursor: pointer;
@@ -131,10 +147,21 @@ const CropStyle = Styled.div`
         justify-content: center;
         text-align: center;
     }
+    .my_add_crop_header{
+        font-size: 24px;
+        font-weight: bold;
+    }
     .selected_icon{
         position: absolute;
         font-size: 14px;
         top: -2px;
+        color: #d40c7e;
+    }
+    .all_selected_icon{
+        position: absolute;
+        font-size: 14px;
+        top: -2px;
+        left: 26px;
         color: #d40c7e;
     }
     .show_mycrop_container{
