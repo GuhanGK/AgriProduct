@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { InboxOutlined, PlusOutlined } from "@ant-design/icons";
-import { Carousel, Upload, message, Image,  ConfigProvider} from "antd";
-import { TinyColor } from '@ctrl/tinycolor';
+import { Carousel, Upload, message, Image, ConfigProvider } from "antd";
+import { TinyColor } from "@ctrl/tinycolor";
 import pestImg1 from "../../../Assets/Images/autonomous_farming.jpg";
 import pestImg2 from "../../../Assets/Images/crop-sprayer-scaled.jpg";
 import pestImg3 from "../../../Assets/Images/drone_shot.jpg";
@@ -19,9 +19,9 @@ import {
   UploadOutlined,
   ArrowRightOutlined,
   CloseCircleOutlined,
-} from "@ant-design/icons"
+} from "@ant-design/icons";
 import SoilTestingWrap from "../SoilTesting/style";
-import { Button } from "react-bootstrap";
+import { Button, Row } from "react-bootstrap";
 const { Dragger } = Upload;
 
 const PestDetection = () => {
@@ -30,11 +30,11 @@ const PestDetection = () => {
   const [apiResponse, setApiResponse] = useState("");
   const [base64Image, setBase64Image] = useState(null);
   const [errorMsg, setErrorMsg] = useState("");
-
-  useEffect(()=>{
+  
+  console.log("PestDetection ~ apiResponse---->", apiResponse);
+  useEffect(() => {
     window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
-
-  },[apiResponse]);
+  }, [apiResponse]);
 
   useEffect(() => {
     const imageUrl = file ? URL.createObjectURL(file) : null;
@@ -44,11 +44,11 @@ const PestDetection = () => {
 
   const soilTestHandler = async () => {
     console.log("submitted!!", base64Image);
-    console.log("soilTestHandler ~ obj.file---->", file.name)
-    let obj = { 
+    console.log("soilTestHandler ~ obj.file---->", file.name);
+    let obj = {
       image: file.name,
-      imageFile:base64Image
-     };
+      imageFile: base64Image,
+    };
     try {
       let response = await axios.post(`${baseUrl}pest-detection`, obj);
       if (response.data.status) {
@@ -72,7 +72,6 @@ const PestDetection = () => {
     };
     reader.readAsDataURL(selectedFile);
   };
-
 
   let baseUrl = "http://127.0.0.1:3000/agri/";
   const contentStyle = {
@@ -100,109 +99,8 @@ const PestDetection = () => {
     onDrop(e) {
       console.log("Dropped files", e.dataTransfer.files);
     },
-  };
-  //----------------------------------------------------------------//
-  const [previewOpen, setPreviewOpen] = useState(false);
-  const [btnload, setBtnload] = useState(false);
-  const [previewImage, setPreviewImage] = useState("");
-  const [position, setPosition] = useState('start');
-    const [fileList, setFileList] = useState([
-    // {
-    //   uid: "-1",
-    //   name: "image.png",
-    //   status: "done",
-    //   url: pestImg6,
-    // },
-    // {
-    //   uid: "-2",
-    //   name: "image.png",
-    //   status: "done",
-    //   url: pestImg7,
-    // },
-    // {
-    //   uid: "-3",
-    //   name: "image.png",
-    //   status: "done",
-    //   url: pestImg8,
-    // },
-    // {
-    //   uid: "-4",
-    //   name: "image.png",
-    //   status: "done",
-    //   url: pestImg9,
-    // },
-    // {
-    //   uid: "-xxx",
-    //   percent: 50,
-    //   name: "image.png",
-    //   status: "uploading",
-    //   url: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
-    // },
-    // {
-    //   uid: "-5",
-    //   name: "image.png",
-    //   status: "error",
-    // },
-  ]);
+  }; 
 
- 
-const getHoverColors = (colors) =>
-  colors.map((color) => new TinyColor(color).lighten(5).toString());
-const getActiveColors = (colors) =>
-  colors.map((color) => new TinyColor(color).darken(5).toString());
-
-
-  const getBase64 = (file) =>
-    new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = (error) => reject(error);
-    });
-  const handlePreview = async (file) => {
-    if (!file.url && !file.preview) {
-      file.preview = await getBase64(file.originFileObj);
-    }
-    setPreviewImage(file.url || file.preview);
-    setPreviewOpen(true);
-  };
-  const handleChange = ({ fileList: newFileList }) => setFileList(newFileList);
-  const uploadButton = (
-    <button
-      style={{
-        border: 0,
-        background: "none",
-      }}
-      type="button"
-    >
-      <PlusOutlined />
-      <div
-        style={{
-          marginTop: 8,
-        }}
-      >
-        Upload
-      </div>
-    </button>
-  );
-
-  // const handleDetect = async (e) => {
-  //   console.log("submitted!!", e);
-  //   let obj = {
-  //     image:""
-  //   };
-  //   try {
-  //     let response = await axios.post(`${baseUrl}login`, obj);      
-  //     if (response.data.status) {
-      
-  //     }
-  //   } catch (error) {
-  //     console.log("error while making api call..", error);
-  //     return false;    
-  //   }
-  // };
- 
-  
   const handleDivClick = () => {
     document.getElementById("fileInput").click();
   };
@@ -213,17 +111,17 @@ const getActiveColors = (colors) =>
           <Carousel autoplay>
             <div>
               <h3 style={contentStyle}>
-                <img src={pestImg1} />
+                <img alt="pest detection 1" src={pestImg1} />
               </h3>
             </div>
             <div>
               <h3 style={contentStyle}>
-                <img src={pestImg5} />
+                <img src={pestImg5} alt="pest detection 2" />
               </h3>
             </div>
             <div>
               <h3 style={contentStyle}>
-                <img src={pestImg3} />
+                <img src={pestImg3} alt="pest detection 3" />
               </h3>
             </div>
             <div>
@@ -233,32 +131,32 @@ const getActiveColors = (colors) =>
             </div>
           </Carousel>{" "}
         </div>
-        
-      <SoilTestingWrap>
-      <div className="file_upload_container my-5">
-                  <div className="p-4 dashed_div" onClick={handleDivClick}>
-                    <input
-                      id="fileInput"
-                      type="file"
-                      style={{ display: "none" }}
-                      onChange={handleFileChange}
-                      accept="image/*"
-                    />
-                    <p className="ant-upload-drag-icon">
-                      <UploadOutlined
-                        style={{ color: "rgb(0 0 0 / 47%)", fontSize: "35px" }}
-                      />
-                    </p>
-                    <p className="ant-upload-hint">
-                      Click or drag file to this area to upload
-                    </p>
-                    <p className=" ant-upload-text">
-                      Please select a soil image for soil testing.
-                    </p>
-                  </div>
-                </div>
 
-                <div className="view_image mb-5">
+        <SoilTestingWrap>
+          <div className="file_upload_container my-5">
+            <div className="p-4 dashed_div" onClick={handleDivClick}>
+              <input
+                id="fileInput"
+                type="file"
+                style={{ display: "none" }}
+                onChange={handleFileChange}
+                accept="image/*"
+              />
+              <p className="ant-upload-drag-icon">
+                <UploadOutlined
+                  style={{ color: "rgb(0 0 0 / 47%)", fontSize: "35px" }}
+                />
+              </p>
+              <p className="ant-upload-hint">
+                Click or drag file to this area to upload
+              </p>
+              <p className=" ant-upload-text">
+                Please select a soil image for soil testing.
+              </p>
+            </div>
+          </div>
+
+          <div className="view_image mb-5">
             {uploadedImage && (
               <div className="image_wrapper p-4">
                 <div className="image_box" style={{ width: 150 }}>
@@ -282,17 +180,26 @@ const getActiveColors = (colors) =>
                     }}
                   >
                     Start Test <ArrowRightOutlined />
-                  </Button>{" "}
+                  </Button>
                 </div>
               </div>
             )}
           </div>
-      </SoilTestingWrap>
-       
+        </SoilTestingWrap>
+            <Row className="">
+             
+            </Row>
         <div className="m-2 d-flex align-items-center justify-content-around">
-          <div className="rounded"><b>SYMPTOMS</b></div>
-          <div className="rounded"><b>PREVENTIONS</b></div>
-        </div>  
+          <div className="rounded">
+            <b>SYMPTOMS</b>
+            {
+              <p></p>
+            }
+          </div>
+          <div className="rounded">
+            <b>PREVENTIONS</b>
+          </div>
+        </div>
       </PestStyle>
     </>
   );
