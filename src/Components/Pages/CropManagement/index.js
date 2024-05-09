@@ -107,15 +107,10 @@ const CropManagement = () => {
                     <div className="crop_manage_container">
                         <div className="crop_item_container">
                             <div className="crop_item_section">
-                                {/* {allCropDataData.map((item)=>{
-                                    return(
-
-                                    )
-                                })} */}
                                 {ProductMenuItems.map((item, index) => {
                                     return(
                                         <div key={index} className="crop_item_box" onClick={() =>{ setOpenModal(!openModal); handleSelectCropItem(item)}}>
-                                            <img src={item.img} alt={item.title} width={50} height={100} />
+                                            <img className="products_img" src={item.img} alt={item.title} />
                                             <p className="crop_item_title">{item.title}</p>
                                         </div>
                                     )

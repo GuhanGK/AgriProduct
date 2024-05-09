@@ -65,13 +65,14 @@ const SelectedCropModal = ({ selectedCrop, setMySelectedCrop, setSowingInput, ha
   return (
     <CropStyle>
       <div className="selected_crop_modal_body">
-        <p>Selected Crop:</p>
+        <p className="my_add_crop_header">Selected Crop:</p>
         <div className="selected_crop_img">
           <img
             src={selectedCrop?.img}
             width={50}
             height={100}
             alt="SelectedCrop"
+            className="products_img"
           />
           <p className="crop_item_title">{selectedCrop?.title}</p>
         </div>

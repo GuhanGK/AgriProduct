@@ -32,9 +32,10 @@ const ShowAllCrop = ({setOpenModal, handleCloseModal, setSelectedCrop}) => {
                         alt={item.title}
                         width={50}
                         height={100}
+                        className="products_img"
                     />
                     <p className="crop_item_title">{item.title}</p>
-                    {getItemIndex === index && <BsFillPatchCheckFill className="selected_icon"/>}
+                    {getItemIndex === index && <BsFillPatchCheckFill className="all_selected_icon"/>}
                     </div>
                 </div>
               );
