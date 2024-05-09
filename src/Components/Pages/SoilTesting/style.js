@@ -101,6 +101,36 @@ const SoilTestingWrap = Styled.div`
 .ant-upload-text{
     color:grey;
 }
+.dashed_div{
+    border: 1px dashed #8c8c8c;
+    border-radius: 10px;
+}
+.image_wrapper{
+    display: flex;
+    justify-content: space-around;
+    align-items:center;
+}
+.start_test_btn{
+    height: 60px;
+    width: 200px;
+}
+.view_image{
+    width: 80%;
+    background: #fff;
+    box-shadow: 0px 0px 10px 1px #a2a2a2;    
+
+}
+.image_box{
+    box-shadow: 0px 0px 10px 1px #a2a2a2;    
+    position: relative;
+}
+.remove_btn{
+    position:absolute;
+    font-size:18px;
+    color: red;
+    left:152px;
+    top: -14px;
+}
 
 `;
 
