@@ -4,7 +4,7 @@ import ProductMenuItems from "../../../ProductMenu";
 import { Button } from "react-bootstrap";
 import { BsFillPatchCheckFill } from "react-icons/bs";
 
-const ShowAllCrop = ({setSelectAllCrop, setOpenModal, handleCloseModal}) => {
+const ShowAllCrop = ({setOpenModal, handleCloseModal, setSelectedCrop}) => {
     const [getItemIndex, setGetItemIndex] = useState()
     const [getItem, setGetItem] = useState()
     const hanldeClickItem = (index, item) => {
@@ -13,7 +13,7 @@ const ShowAllCrop = ({setSelectAllCrop, setOpenModal, handleCloseModal}) => {
     }
 
     const handleClick = () => {
-        setSelectAllCrop(getItem)
+        setSelectedCrop(getItem)
         setOpenModal(true)
         handleCloseModal()
     }

@@ -121,7 +121,7 @@ const CropManagement = () => {
                     className="selected_crop_modal"
                 >
                     <SelectedCropModal 
-                        selectedCrop={selectedCrop === "" ? selectAllCrop : selectedCrop}
+                        selectedCrop={selectedCrop}
                         setMySelectedCrop={setMySelectedCrop}
                         setSowingInput={setSowingInput}
                         handleCloseModal={handleCloseModal}
@@ -160,6 +160,7 @@ const CropManagement = () => {
                 >
                     <ShowAllCrop 
                         setSelectAllCrop={setSelectAllCrop}
+                        setSelectedCrop={setSelectedCrop}
                         setOpenModal={setOpenModal}
                         handleCloseModal={handleCloseAllCrop}
                     />
