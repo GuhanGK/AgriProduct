@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { InboxOutlined, PlusOutlined } from "@ant-design/icons";
-import { Carousel, Upload, message, Image, Button, ConfigProvider} from "antd";
+import { Carousel, Upload, message, Image,  ConfigProvider} from "antd";
 import { TinyColor } from '@ctrl/tinycolor';
 import pestImg1 from "../../../Assets/Images/autonomous_farming.jpg";
 import pestImg2 from "../../../Assets/Images/crop-sprayer-scaled.jpg";
@@ -14,9 +14,66 @@ import pestImg9 from "../../../Assets/Images/wheat+stock+photo.jpeg";
 import pestImg10 from "../../../Assets/Images/soiltesting.png";
 import PestStyle from "./style";
 import axios from "axios";
+import ModalImage from "react-modal-image";
+import {
+  UploadOutlined,
+  ArrowRightOutlined,
+  CloseCircleOutlined,
+} from "@ant-design/icons"
+import SoilTestingWrap from "../SoilTesting/style";
+import { Button } from "react-bootstrap";
 const { Dragger } = Upload;
 
 const PestDetection = () => {
+  const [file, setFile] = useState(null);
+  const [uploadedImage, setUploadedImage] = useState(null);
+  const [apiResponse, setApiResponse] = useState("");
+  const [base64Image, setBase64Image] = useState(null);
+  const [errorMsg, setErrorMsg] = useState("");
+
+  useEffect(()=>{
+    window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+
+  },[apiResponse]);
+
+  useEffect(() => {
+    const imageUrl = file ? URL.createObjectURL(file) : null;
+    console.log("useEffect ~ file---->", file?.name);
+    setUploadedImage(imageUrl);
+  }, [file]);
+
+  const soilTestHandler = async () => {
+    console.log("submitted!!", base64Image);
+    console.log("soilTestHandler ~ obj.file---->", file.name)
+    let obj = { 
+      image: file.name,
+      imageFile:base64Image
+     };
+    try {
+      let response = await axios.post(`${baseUrl}pest-detection`, obj);
+      if (response.data.status) {
+        console.log("Api call success!!");
+        setApiResponse(response.data.data);
+      }
+    } catch (error) {
+      console.log("error while making api call..", error);
+      let message = error?.response?.data?.message || "Error while login!!";
+      setErrorMsg(message);
+      return false;
+    }
+  };
+  const handleFileChange = (e) => {
+    const selectedFile = e.target.files[0];
+    console.log("handleFileChange ~ selectedFile---->", selectedFile);
+    setFile(selectedFile);
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      setBase64Image(event.target.result);
+    };
+    reader.readAsDataURL(selectedFile);
+  };
+
+
   let baseUrl = "http://127.0.0.1:3000/agri/";
   const contentStyle = {
     height: "350px",
@@ -88,9 +145,7 @@ const PestDetection = () => {
     // },
   ]);
 
-  const colors1 = ['#6253E1', '#04BEFE'];
-const colors2 = ['#fc6076', '#ff9a44', '#ef9d43', '#e75516'];
-const colors3 = ['#40e495', '#30dd8a', '#2bb673'];
+ 
 const getHoverColors = (colors) =>
   colors.map((color) => new TinyColor(color).lighten(5).toString());
 const getActiveColors = (colors) =>
@@ -131,25 +186,26 @@ const getActiveColors = (colors) =>
     </button>
   );
 
-  const handleDetect = async (e) => {
-    console.log("submitted!!", e);
-    let obj = {
-      image:""
-    };
-    try {
-      let response = await axios.post(`${baseUrl}login`, obj);      
-      if (response.data.status) {
+  // const handleDetect = async (e) => {
+  //   console.log("submitted!!", e);
+  //   let obj = {
+  //     image:""
+  //   };
+  //   try {
+  //     let response = await axios.post(`${baseUrl}login`, obj);      
+  //     if (response.data.status) {
       
-      }
-    } catch (error) {
-      console.log("error while making api call..", error);
-      return false;    
-    }
+  //     }
+  //   } catch (error) {
+  //     console.log("error while making api call..", error);
+  //     return false;    
+  //   }
+  // };
+ 
+  
+  const handleDivClick = () => {
+    document.getElementById("fileInput").click();
   };
-  const loaderFunc=()=>{
-    setBtnload(true);
-    handleDetect();
-  }
   return (
     <>
       <PestStyle>
@@ -177,63 +233,62 @@ const getActiveColors = (colors) =>
             </div>
           </Carousel>{" "}
         </div>
-        {/* <div className="m-5">
-          <Dragger {...props}>
-            <p className="ant-upload-drag-icon">
-              <InboxOutlined />
-            </p>
-            <p className="ant-upload-text">
-              Click or drag file to this area to upload
-            </p>
-            
-          </Dragger>
-        </div> */}
+        
+      <SoilTestingWrap>
+      <div className="file_upload_container my-5">
+                  <div className="p-4 dashed_div" onClick={handleDivClick}>
+                    <input
+                      id="fileInput"
+                      type="file"
+                      style={{ display: "none" }}
+                      onChange={handleFileChange}
+                      accept="image/*"
+                    />
+                    <p className="ant-upload-drag-icon">
+                      <UploadOutlined
+                        style={{ color: "rgb(0 0 0 / 47%)", fontSize: "35px" }}
+                      />
+                    </p>
+                    <p className="ant-upload-hint">
+                      Click or drag file to this area to upload
+                    </p>
+                    <p className=" ant-upload-text">
+                      Please select a soil image for soil testing.
+                    </p>
+                  </div>
+                </div>
 
-        <div className="m-4 d-flex justify-content-center align-items-center">
-          <Upload
-            action="https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload"
-            listType="picture-card"
-            fileList={fileList}
-            onPreview={handlePreview}
-            onChange={handleChange}
-          >
-            {fileList.length >= 1 ? null : uploadButton}
-          </Upload>
-          {previewImage && (
-            <Image
-              wrapperStyle={{
-                display: "none",
-              }}
-              preview={{
-                visible: previewOpen,
-                onVisibleChange: (visible) => setPreviewOpen(visible),
-                afterOpenChange: (visible) => !visible && setPreviewImage(""),
-              }}
-              src={previewImage}
-            />
-          )}
-        </div>
-        <div>
-          {/* <Button type="primary" loading={btnload} onClick={loaderFunc}iconPosition={position}>
-            Detect!!!
-          </Button> */}
-          <ConfigProvider
-      theme={{
-        components: {
-          Button: {
-            colorPrimary: `linear-gradient(90deg,  ${colors2.join(', ')})`,
-            colorPrimaryHover: `linear-gradient(90deg, ${getHoverColors(colors2).join(', ')})`,
-            colorPrimaryActive: `linear-gradient(90deg, ${getActiveColors(colors2).join(', ')})`,
-            lineWidth: 0,
-          },
-        },
-      }}
-    >
-      <Button type="primary" size="large" loading={btnload} onClick={loaderFunc}iconPosition={position}>
-         Detect!!!
-      </Button>
-    </ConfigProvider>
-        </div>
+                <div className="view_image mb-5">
+            {uploadedImage && (
+              <div className="image_wrapper p-4">
+                <div className="image_box" style={{ width: 150 }}>
+                  <ModalImage
+                    small={uploadedImage}
+                    large={uploadedImage}
+                    hideZoom={false}
+                    showRotate={true}
+                  />
+                  <CloseCircleOutlined
+                    className="remove_btn"
+                    onClick={() => setUploadedImage(null)}
+                  />
+                </div>
+                <div>
+                  <Button
+                    className="start_test_btn"
+                    variant="success"
+                    onClick={() => {
+                      soilTestHandler();
+                    }}
+                  >
+                    Start Test <ArrowRightOutlined />
+                  </Button>{" "}
+                </div>
+              </div>
+            )}
+          </div>
+      </SoilTestingWrap>
+       
         <div className="m-2 d-flex align-items-center justify-content-around">
           <div className="rounded"><b>SYMPTOMS</b></div>
           <div className="rounded"><b>PREVENTIONS</b></div>
