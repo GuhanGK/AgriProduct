@@ -50,13 +50,29 @@ export const Login = () => {
             user: decodedUser,
           };
         }
-        localStorage.setItem("isLoggedIn", JSON.stringify(result.isLoggedIn));
-        localStorage.setItem("user", JSON.stringify(result));
-        localStorage.setItem("userData", JSON.stringify(decodedUser));
-        const authUser = localStorage.getItem("user");
-        const user = JSON.parse(authUser);
-        dispatch(setUserData(user));
-        navigate("/");
+        if(obj.emailId === "admin@gmail.com" && obj.password === "admin@001"){
+          console.log("This is admin user!!");
+          localStorage.setItem("isAdmin", "Admin");
+          localStorage.setItem("isLoggedIn", JSON.stringify(result.isLoggedIn));
+          localStorage.setItem("user", JSON.stringify(result));
+          localStorage.setItem("userData", JSON.stringify(decodedUser));
+          const authUser = localStorage.getItem("user");
+          const user = JSON.parse(authUser);
+          dispatch(setUserData(user));
+          navigate("/admin");
+        }
+        else{
+          localStorage.setItem("isAdmin", "User");
+          localStorage.setItem("isLoggedIn", JSON.stringify(result.isLoggedIn));
+          localStorage.setItem("user", JSON.stringify(result));
+          localStorage.setItem("userData", JSON.stringify(decodedUser));
+          const authUser = localStorage.getItem("user");
+          const user = JSON.parse(authUser);
+          dispatch(setUserData(user));
+          navigate("/");
+        }
+
+        
       }
     } catch (error) {
       console.log("error while making api call..", error);

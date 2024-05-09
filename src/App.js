@@ -20,6 +20,7 @@ export const isOnlineContext = React.createContext();
 function App() {
   const NetworkState = useNetworkState();
   const netState = NetworkState.online;
+  let role = localStorage.getItem('isAdmin');
 
   const [online, setonline] = useState(netState);
 
@@ -38,11 +39,11 @@ function App() {
               <Route path="/register" element={<SignUp />} />
               <Route element={<ProtectedRoute />}>
                 <Route path="/" element={<Layout />}>
+                  {role === "Admin" && <Route path="/admin" element={<AdminPanel/>} />}
                   <Route path="/" element={<Dashboard />} />
-                  <Route path="/admin" element={<AdminPanel/>} />
-                  <Route path="/soil-testing" element={<SoilTesting/>} />
-                  <Route path="/pest-detection" element={<PestDetection/>} />
-                  <Route path="/crop-management" element={<CropManagement />} />
+                  {role === "User" &&  <Route path="/soil-testing" element={<SoilTesting/>} />}
+                  {role === "User" &&  <Route path="/pest-detection" element={<PestDetection/>} />}
+                  {role === "User" &&  <Route path="/crop-management" element={<CropManagement />} />}
                 </Route>
               </Route>
             </Route>

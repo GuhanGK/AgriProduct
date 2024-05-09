@@ -43,7 +43,9 @@ const Layout = () => {
     const theme = useTheme();
     const [mobileOpen, setMobileOpen] = useState(false);
     const dispatch = useDispatch();  
-    const navigate = useNavigate();  
+    const navigate = useNavigate(); 
+    let role = localStorage.getItem('isAdmin');
+ 
 
     const isLoggedIn = localStorage.getItem("isLoggedIn");
     console.log("Login ~ isLoggedIn---->", isLoggedIn)
@@ -93,13 +95,15 @@ const Layout = () => {
         navigate("/login");
     }
 
-    const menuItems = [
+    let menuItems = [
         { text: 'Dashboard', icon: <img src={Dashboard} alt="Dashboard" width={25}/>, to:"/" },
-        { text: 'Admin', icon: <img src={Admin} alt="Admin" width={25}/>, to:"/admin" },
         { text: 'Crop Management', icon: <img src={CropImg} alt="Crop Management" width={25}/>, to:"/crop-management" },
         { text: 'Pest detection', icon: <img src={PestImg} alt="Crop Management" width={25}/> ,to:"/pest-detection"},
         { text: 'Soil testing', icon: <img src={SoilImg} alt="Crop Management" width={25}/>, to:"/soil-testing" },
     ];
+    if(role === "Admin"){
+        menuItems = [{ text: 'Admin', icon: <img src={Admin} alt="Admin" width={25}/>, to:"/admin" }]
+    }
     let data = localStorage.getItem('userData');
     let user;
     if(data){
