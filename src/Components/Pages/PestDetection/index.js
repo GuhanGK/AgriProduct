@@ -186,20 +186,37 @@ const PestDetection = () => {
             )}
           </div>
         </SoilTestingWrap>
-            <Row className="">
-             
+        {
+          apiResponse &&
+          <>
+           <Row className="results_head">
+             <p className="pest_name">Pest name : {apiResponse?.pestname}</p>
             </Row>
-        <div className="m-2 d-flex align-items-center justify-content-around">
-          <div className="rounded">
-            <b>SYMPTOMS</b>
-            {
-              <p></p>
-            }
-          </div>
-          <div className="rounded">
-            <b>PREVENTIONS</b>
-          </div>
-        </div>
+            <div className="m-2 d-flex align-items-center justify-content-around">
+              <div className="rounded">
+                <p className="side_heading">SYMPTOMS</p>
+                { 
+                  apiResponse?.symptoms?.map((item, i)=>{
+                    return(
+                      <p className="messages">{i+1}.{item}</p>
+                    )
+                  })
+                }
+              </div>
+              <div className="rounded">
+                <p className="side_heading">PREVENTIONS</p>
+                {
+                  apiResponse?.prevention?.map((item, i)=>{
+                    return(
+                      <p  className="messages">{i+1}.{item}</p>
+                    )
+                  })
+                }
+              </div>
+            </div>
+          </>
+        }
+           
       </PestStyle>
     </>
   );
