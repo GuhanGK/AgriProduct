@@ -87,8 +87,8 @@ const CropManagement = () => {
                                 })}
                             </div>
                             
-                            <div className="crop_item_plus_box">
-                                <FaPlus className="plus_icon" onClick={handleOpenSelectCrop}/>
+                            <div className="crop_item_plus_box" onClick={handleOpenSelectCrop}>
+                                <FaPlus className="plus_icon"/>
                             </div>
                         </div>
                     </div>
@@ -107,8 +107,8 @@ const CropManagement = () => {
                                 })}
                             </div>
                             
-                            <div className="crop_item_plus_box">
-                                <FaPlus className="plus_icon" onClick={handleOpenMySelectCrop}/>
+                            <div className="crop_item_plus_box" onClick={handleOpenMySelectCrop}>
+                                <FaPlus className="plus_icon"/>
                             </div>
                         </div>
                     </div>
