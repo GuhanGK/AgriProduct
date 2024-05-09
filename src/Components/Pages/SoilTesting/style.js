@@ -131,6 +131,36 @@ const SoilTestingWrap = Styled.div`
     left:152px;
     top: -14px;
 }
+.result_heading{
+    font-size:35px;
+    font-weight:900;
+}
+.response_container{
+    width: 50%;
+    margin: auto;
+}
+.key{
+    font-weight:bold;
+}
+.typewriter-text {
+    display: flex;
+    justify-content:space-between;
+  overflow: hidden; /* Ensures the text is not visible until animated */
+  border-right: .15em solid orange; /* The typewriter cursor */
+  white-space: nowrap; /* Keeps the text on a single line */
+  margin: 0 auto; /* Centers the text horizontally */
+  letter-spacing: .15em; /* Adjusts the spacing between characters */
+  animation: typing 3.5s steps(40, end); /* The typewriter animation */
+}
+
+@keyframes typing {
+  from {
+    width: 0; /* Starts with no width */
+  }
+  to {
+    width: 100%; /* Ends with full width */
+  }
+}
 
 `;
 
