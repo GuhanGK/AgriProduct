@@ -104,6 +104,7 @@ const PestDetection = () => {
   const handleDivClick = () => {
     document.getElementById("fileInput").click();
   };
+  console.log("working")
   return (
     <>
       <PestStyle>
@@ -208,7 +209,7 @@ const PestDetection = () => {
                 {
                   apiResponse?.prevention?.map((item, i)=>{
                     return(
-                      <p  className="messages">{i+1}.{item}</p>
+                      <p  className="messages">{i+1}.{item}</p> 
                     )
                   })
                 }
