@@ -75,6 +75,7 @@ const SoilTestingWrap = Styled.div`
 }
 .file_upload_container{
     width: 80%;
+    margin: auto;
     background: #fff;
     border-radius: 10px;
     box-shadow: 0px 0px 10px 1px #a2a2a2;    
@@ -116,6 +117,7 @@ const SoilTestingWrap = Styled.div`
 }
 .view_image{
     width: 80%;
+    margin: auto;
     background: #fff;
     box-shadow: 0px 0px 10px 1px #a2a2a2;    
 
