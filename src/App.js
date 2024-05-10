@@ -20,13 +20,25 @@ export const isOnlineContext = React.createContext();
 function App() {
   const NetworkState = useNetworkState();
   const netState = NetworkState.online;
+
   let role = localStorage.getItem('isAdmin');
+  console.log("App ~ role---->", role)
+  
 
   const [online, setonline] = useState(netState);
 
   useEffect(() => {
     setonline(netState);
   }, [netState]);
+
+  // useEffect(() => {
+  //   if(role==="Admin"){
+  //     navigate("/admin");
+  //   }
+  //   else{
+  //     navigate("/");
+  //   }
+  // }, []);
 
   const isOnlineContextValue = { online };
   return (
@@ -39,9 +51,10 @@ function App() {
               <Route path="/register" element={<SignUp />} />
               <Route element={<ProtectedRoute />}>
                 <Route path="/" element={<Layout />}>
-                {role === "Admin" && <Route path="/admin" element={<AdminPanel/>} />}
-                  {role === "Admin" ? <Route path="/" element={<AdminPanel />} /> : <Route path="/" element={<Dashboard />} />}
-                  {/* {role === "User" && <Route path="/" element={<Dashboard />} />} */}
+                {/* {role === "Admin" && <Route path="/admin" element={<AdminPanel/>} />} */}
+                  {/* {role === "Admin" ? <Route path="/" element={<AdminPanel />} /> : <Route path="/" element={<Dashboard />} />} */}
+                  <Route path="/" element={<Dashboard />} />
+                  <Route path="/admin" element={<AdminPanel />} />
                   <Route path="/soil-testing" element={<SoilTesting/>} />
                   <Route path="/pest-detection" element={<PestDetection/>} />
                   <Route path="/crop-management" element={<CropManagement />} />

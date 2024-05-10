@@ -14,7 +14,6 @@ const AdminPanel = () => {
   const [userData, setUserData] = useState([]);
   const [loading, setLoading] = useState(false);
 
-
   const handleCloseModal = () => setOpenUserModal(false);
   const dataSource = [
     {
@@ -57,52 +56,49 @@ const AdminPanel = () => {
       ),
     },
   ];
-console.log("userData==>",userData)
-  useEffect(()=>{
-    allUserHandler()
-  },[])
+  console.log("userData==>", userData);
+  useEffect(() => {
+    allUserHandler();
+  }, []);
 
-  const allUserHandler = async()=>{
+  const allUserHandler = async () => {
     setLoading(true);
     const URL = "http://127.0.0.1:3000/agri/getallusers";
-    try{
+    try {
       const response = await axios.get(URL);
 
-      if(response.status){
-          console.log("response all crops---->", response);
-          const cropsByEmail = {};
-          response?.data?.data?.forEach(crop => {
-            if (!cropsByEmail[crop.emailId]) {
-                cropsByEmail[crop.emailId] = [];
-            }
-            cropsByEmail[crop.emailId].push({
-                cropName: crop.cropName,
-                sowingDate: crop.sowingDate,
-                area: crop.area,
-                surveyNumber: crop.surveyNumber
-            });
+      if (response.status) {
+        console.log("response all crops---->", response);
+        const cropsByEmail = {};
+        response?.data?.data?.forEach((crop) => {
+          if (!cropsByEmail[crop.emailId]) {
+            cropsByEmail[crop.emailId] = [];
+          }
+          cropsByEmail[crop.emailId].push({
+            cropName: crop.cropName,
+            sowingDate: crop.sowingDate,
+            area: crop.area,
+            surveyNumber: crop.surveyNumber,
+          });
         });
-        
+
         // Restructuring data
         const modifiedData = [];
         for (const emailId in cropsByEmail) {
-            modifiedData.push({
-                emailId: emailId,
-                crops: cropsByEmail[emailId]
-            });
+          modifiedData.push({
+            emailId: emailId,
+            crops: cropsByEmail[emailId],
+          });
         }
-        
-          setUserData(modifiedData);
-          setLoading(false);
-      }    
-  }catch(error){
-      console.log("error--->", error)
+
+        setUserData(modifiedData);
+        setLoading(false);
+      }
+    } catch (error) {
+      console.log("error--->", error);
       setLoading(false);
-
-  }
-  }
-
-
+    }
+  };
 
   const handleView = (record) => {
     setOpenUserModal(!openUserModal);
@@ -117,48 +113,46 @@ console.log("userData==>",userData)
           {/* <div>
             <Table dataSource={dataSource} columns={columns} />
           </div> */}
-          <Accordion>
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel1-content"
-              id="panel1-header"
-              className=""
-            >
-              <div className="profile_circle_container">
-                <div className="profile_circle">
-                  <p className="profile_circle_letter">D</p>
-                </div>
-                <div className="text-left">
-                  <p className="userId_name mb-0">demouser@gmail.com</p>
-                </div>
-              </div>
-            </AccordionSummary>
-            <AccordionDetails>
-              <p className="crops_header">Crops:</p>
-              <div className="text-left mb-2 w-100 d-flex justify-content-between align-items-center">
-                <div>
-                    <p className="user_crops_details mb-0">1. Tomato</p>
-                    <span className="span_survey_number">SRN4863</span>
-                </div>
-                <div className="between_line"></div>
-                <div>
-                    <p className="user_crops_details mb-0">2024-05-10</p>
-                    <span className="span_survey_number">Acre 2</span>
-                </div>
-              </div>
-              <div className="text-left mb-2 w-100 d-flex justify-content-between align-items-center">
-                <div>
-                    <p className="user_crops_details mb-0">2. Onion</p>
-                    <span className="span_survey_number">SRN4863</span>
-                </div>
-                <div className="between_line"></div>
-                <div>
-                    <p className="user_crops_details mb-0">2024-05-10</p>
-                    <span className="span_survey_number">Acre 1</span>
-                </div>
-              </div>
-            </AccordionDetails>
-          </Accordion>
+
+          {userData?.map((items) => {
+            return (
+              <Accordion className="mb-3">
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel1-content"
+                  id="panel1-header"
+                  className=""
+                >
+                  <div className="profile_circle_container">
+                    <div className="profile_circle">
+                      <p className="profile_circle_letter">{items?.emailId[0].toUpperCase()}</p>
+                    </div>
+                    <div className="text-left">
+                      <p className="userId_name mb-0">{items?.emailId}</p>
+                    </div>
+                  </div>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <p className="crops_header">Crops</p>
+                  {items?.crops.map((item) => {
+                    return (
+                      <div className="text-left mb-4 w-100 d-flex justify-content-between align-items-center">
+                        <div>
+                          <p className="user_crops_details mb-0"><b>Name:</b> {item?.cropName}</p>
+                          <span className="span_survey_number"><b>Survey Number:</b> {item?.surveyNumber}</span>
+                        </div>
+                        <div className="between_line"></div>
+                        <div>
+                          <p className="user_crops_details mb-0"><b>Sowing Date: </b>{item?.sowingDate}</p>
+                          <span className="span_survey_number"><b>Acre: </b>{item?.area}</span>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </AccordionDetails>
+              </Accordion>
+            );
+          })}
         </div>
       </UserDetailsStyle>
     </>

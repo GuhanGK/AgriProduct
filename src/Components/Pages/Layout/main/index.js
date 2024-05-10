@@ -153,7 +153,7 @@ const Layout = () => {
                                                     {user?.name[0]}
                                                 </div>
                                             </Popover>  */}
-                                            <Popover content={content} title="Title" trigger="click" placement="bottomLeft" getPopupContainer={(triggerNode) => triggerNode.parentNode}>
+                                            <Popover content={content} trigger="click" placement="bottomLeft" getPopupContainer={(triggerNode) => triggerNode.parentNode}>
                                                 <div className="profile_circle">  
                                                     {user?.name[0]}
                                                 </div>

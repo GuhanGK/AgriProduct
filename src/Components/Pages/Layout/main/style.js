@@ -32,6 +32,10 @@ const LayoutStyle = Styled.div`
         align-items:center;
         gap: 2rem;
     }
+    .ant-popover-content:hover{
+        background: #fff;
+        border-radius:8px;
+    }
     .profile_circle{
         width: 45px;
         height: 45px;
