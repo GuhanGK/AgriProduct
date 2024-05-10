@@ -88,11 +88,13 @@ const Layout = () => {
     }));
 
     const logoutHandler = async()=>{
+        localStorage.setItem("isAdmin", "");
         localStorage.setItem("isLoggedIn", false);
         localStorage.setItem("user", "");
         localStorage.setItem("userData", "");
         dispatch(setUserData(""));
         navigate("/login");
+
     }
 
     let menuItems = [
@@ -146,11 +148,16 @@ const Layout = () => {
                                     </Nav> */}
                                     <div className="profile_wrapp">
                                         <div>Hi {user?.name}!</div>
-                                            <Popover content={content} title="Title" trigger="click">
+                                            {/* <Popover content={content} title="Title" trigger="click">
                                                 <div className="profile_circle">  
                                                     {user?.name[0]}
                                                 </div>
-                                            </Popover>  
+                                            </Popover>  */}
+                                            <Popover content={content} title="Title" trigger="click" placement="bottomLeft" getPopupContainer={(triggerNode) => triggerNode.parentNode}>
+                                                <div className="profile_circle">  
+                                                    {user?.name[0]}
+                                                </div>
+                                            </Popover> 
                                     </div>
                                 </Navbar>
                             </Row>

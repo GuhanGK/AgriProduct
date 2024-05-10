@@ -44,24 +44,29 @@ const CropStyle = Styled.div`
     }
     .crop_item_section{
         display: flex;
-        width: 100%;
-        overflow-x: hidden;
+        /* padding-bottom:1rem; */
+        width: 90%;
+        overflow-x: scroll;
         text-overflow: ellipsis; 
         white-space: nowrap;
     }
+    
     
     .crop_item_section::-webkit-scrollbar {
         width: 0px;
         background: transparent; /* make scrollbar transparent */
     }
+   
     .crop_item_box {
         flex: 0 0 auto; 
+        overflow: hidden;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         margin-right: 10px;
         width: 135px;
+        height: 135px;
         border-radius: 50%;
         background: #fff;
         cursor: pointer;
@@ -88,7 +93,7 @@ const CropStyle = Styled.div`
     }
 
     .selected_crop_img{
-        width: max-content;
+        width: 100%;
         text-align: center;
         padding: 12px
         border-radius: 50%;
@@ -117,10 +122,15 @@ const CropStyle = Styled.div`
     }
     .mycrop_item_section{
         display: flex;
-        width: 100%;
+        width: 90%;
         overflow-x: scroll;
         text-overflow: ellipsis; 
         white-space: nowrap;
+    }
+    .my_crop_image{
+        width: 70%;
+        aspect-ratio: 3 / 2;
+        object-fit: contain;
     }
     .mycrop_item_section::-webkit-scrollbar {
         width: 0px;

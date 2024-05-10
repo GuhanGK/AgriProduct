@@ -9,6 +9,10 @@ const UserDetailsStyle = Styled.div`
         display: flex;
         justify-content: end;
     }
+    .admin_head{
+        font-size:30px;
+        font-weight:800;
+    }
     .my_add_crop_header{
         font-size: 24px;
         font-weight: bold;

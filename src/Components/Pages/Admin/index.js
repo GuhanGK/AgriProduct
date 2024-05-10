@@ -1,5 +1,5 @@
 import { Table } from "antd";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Accordion from "@mui/material/Accordion";
 import AccordionActions from "@mui/material/AccordionActions";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -7,9 +7,13 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Button from "@mui/material/Button";
 import UserDetailsStyle from "./style";
+import axios from "axios";
 
 const AdminPanel = () => {
   const [openUserModal, setOpenUserModal] = useState(false);
+  const [userData, setUserData] = useState([]);
+  const [loading, setLoading] = useState(false);
+
 
   const handleCloseModal = () => setOpenUserModal(false);
   const dataSource = [
@@ -53,6 +57,52 @@ const AdminPanel = () => {
       ),
     },
   ];
+console.log("userData==>",userData)
+  useEffect(()=>{
+    allUserHandler()
+  },[])
+
+  const allUserHandler = async()=>{
+    setLoading(true);
+    const URL = "http://127.0.0.1:3000/agri/getallusers";
+    try{
+      const response = await axios.get(URL);
+
+      if(response.status){
+          console.log("response all crops---->", response);
+          const cropsByEmail = {};
+          response?.data?.data?.forEach(crop => {
+            if (!cropsByEmail[crop.emailId]) {
+                cropsByEmail[crop.emailId] = [];
+            }
+            cropsByEmail[crop.emailId].push({
+                cropName: crop.cropName,
+                sowingDate: crop.sowingDate,
+                area: crop.area,
+                surveyNumber: crop.surveyNumber
+            });
+        });
+        
+        // Restructuring data
+        const modifiedData = [];
+        for (const emailId in cropsByEmail) {
+            modifiedData.push({
+                emailId: emailId,
+                crops: cropsByEmail[emailId]
+            });
+        }
+        
+          setUserData(modifiedData);
+          setLoading(false);
+      }    
+  }catch(error){
+      console.log("error--->", error)
+      setLoading(false);
+
+  }
+  }
+
+
 
   const handleView = (record) => {
     setOpenUserModal(!openUserModal);
@@ -63,7 +113,7 @@ const AdminPanel = () => {
     <>
       <UserDetailsStyle>
         <div>
-          <p>Users</p>
+          <p className="admin_head">Users</p>
           {/* <div>
             <Table dataSource={dataSource} columns={columns} />
           </div> */}

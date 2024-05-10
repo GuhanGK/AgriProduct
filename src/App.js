@@ -39,11 +39,12 @@ function App() {
               <Route path="/register" element={<SignUp />} />
               <Route element={<ProtectedRoute />}>
                 <Route path="/" element={<Layout />}>
-                  {role === "Admin" && <Route path="/admin" element={<AdminPanel/>} />}
-                  <Route path="/" element={<Dashboard />} />
-                  {role === "User" &&  <Route path="/soil-testing" element={<SoilTesting/>} />}
-                  {role === "User" &&  <Route path="/pest-detection" element={<PestDetection/>} />}
-                  {role === "User" &&  <Route path="/crop-management" element={<CropManagement />} />}
+                {role === "Admin" && <Route path="/admin" element={<AdminPanel/>} />}
+                  {role === "Admin" ? <Route path="/" element={<AdminPanel />} /> : <Route path="/" element={<Dashboard />} />}
+                  {/* {role === "User" && <Route path="/" element={<Dashboard />} />} */}
+                  <Route path="/soil-testing" element={<SoilTesting/>} />
+                  <Route path="/pest-detection" element={<PestDetection/>} />
+                  <Route path="/crop-management" element={<CropManagement />} />
                 </Route>
               </Route>
             </Route>

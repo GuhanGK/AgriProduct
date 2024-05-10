@@ -134,7 +134,7 @@ const CropManagement = () => {
                                     console.log("{myCropDataData?.data?.map ~ imageUrl---->", imageUrl)
                                     return(
                                         <div key={index} className="crop_item_box" onClick={() => {setSelectedCrop(imageUrl[0]); setOpenMyCropItem(!openMyCropItem)}}>
-                                            <img src={imageUrl[0]?.img} alt={item?.title} width={50} height={100} />
+                                            <img src={imageUrl[0]?.img} alt={item?.title} width={50}  className="my_crop_image" />
                                             <p className="crop_item_title">{item?.cropName}</p>
                                         </div>
                                     )
